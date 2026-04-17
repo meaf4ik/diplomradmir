@@ -17,6 +17,30 @@
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: #f8fafc;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        
+        body.dark-mode {
+            background-color: #0f172a;
+            color: #f1f5f9;
+        }
+        body.dark-mode nav {
+            background-color: rgba(15, 23, 42, 0.8);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        body.dark-mode .bg-white {
+            background-color: #1e293b !important;
+        }
+        body.dark-mode .text-slate-900, body.dark-mode .text-slate-800 {
+            color: #f1f5f9 !important;
+        }
+        body.dark-mode .partner-card {
+            background-color: #1e293b;
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+        body.dark-mode .bg-slate-50 {
+            background-color: #0f172a !important;
         }
 
         .hero-gradient {
@@ -74,7 +98,7 @@
                 <div id="load-bar" class="h-full bg-blue-600 w-0 transition-all duration-300"></div>
             </div>
         </div>
-        <div class="text-slate-500 text-[10px] mt-4 uppercase tracking-widest font-semibold">Инициализация систем ИИ...</div>
+        <div class="text-slate-500 text-[10px] mt-4 uppercase tracking-widest font-semibold" data-i18n="loading">Инициализация систем ИИ...</div>
     </div>
 </div>
 
@@ -84,11 +108,24 @@
                 <i class="fas fa-cube text-blue-600 text-2xl"></i>
                 <span class="font-extrabold text-xl tracking-tighter uppercase">Almaty<span class="text-blue-600">Logix</span></span>
             </div>
-            <div class="hidden md:flex gap-8 font-semibold text-sm uppercase tracking-wider">
-                <a href="#about" class="hover:text-blue-600 transition">О нас</a>
-                <a href="#partners" class="hover:text-blue-600 transition">Партнеры</a>
-                <a href="#tracking" class="hover:text-blue-600 transition">Трекинг</a>
-                <a href="#" class="text-blue-600 border-b-2 border-blue-600">Сотрудничество</a>
+            
+            <div class="flex items-center gap-4">
+                <div class="hidden md:flex gap-8 font-semibold text-sm uppercase tracking-wider mr-4">
+                    <a href="#about" class="hover:text-blue-600 transition" data-i18n="nav-about">О нас</a>
+                    <a href="#partners" class="hover:text-blue-600 transition" data-i18n="nav-partners">Партнеры</a>
+                    <a href="#tracking" class="hover:text-blue-600 transition" data-i18n="nav-tracking">Трекинг</a>
+                </div>
+
+                <div class="flex items-center gap-2 border-l border-slate-200 pl-4">
+                    <button onclick="toggleLang()" class="group flex items-center gap-2 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg transition border border-slate-200 dark:bg-slate-800 dark:border-slate-700">
+                        <i class="fas fa-globe text-blue-600 text-xs"></i>
+                        <span id="langBtn" class="text-slate-700 dark:text-white text-xs font-bold uppercase tracking-widest">RU</span>
+                    </button>
+                    
+                    <button onclick="toggleTheme()" id="themeBtn" class="w-8 h-8 flex items-center justify-center rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition dark:bg-slate-800 dark:text-white">
+                        <i class="fas fa-moon" id="themeIcon"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
@@ -101,20 +138,20 @@
                     Smart Logistics 2026
                 </span>
                 
-                <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-4 md:mb-6 leading-[1.15] text-white tracking-tight">
+                <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-4 md:mb-6 leading-[1.15] text-white tracking-tight" data-i18n="hero-title">
                     Автоматизируем <br class="hidden sm:block"> 
                     <span class="text-blue-500 text-shadow-sm">будущее</span> перевозок
                 </h1>
                 
-                <p class="text-slate-400 text-xs sm:text-base md:text-lg mb-6 md:mb-8 leading-relaxed max-w-sm sm:max-w-md mx-auto lg:mx-0">
+                <p class="text-slate-400 text-xs sm:text-base md:text-lg mb-6 md:mb-8 leading-relaxed max-w-sm sm:max-w-md mx-auto lg:mx-0" data-i18n="hero-desc">
                     Мы — технологический лидер в сфере логистики Алматы. Корпоративная база данных для вашего бизнеса.
                 </p>
                 
                 <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 px-4 sm:px-0">
-                    <a href="#tracking" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3.5 rounded-xl font-bold transition shadow-lg text-sm md:text-base">
+                    <a href="#tracking" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3.5 rounded-xl font-bold transition shadow-lg text-sm md:text-base" data-i18n="btn-track">
                         Отследить груз
                     </a>
-                    <a href="#partners" class="bg-slate-800/50 hover:bg-slate-700 text-white px-6 py-3.5 rounded-xl font-bold transition text-sm md:text-base border border-slate-700">
+                    <a href="#partners" class="bg-slate-800/50 hover:bg-slate-700 text-white px-6 py-3.5 rounded-xl font-bold transition text-sm md:text-base border border-slate-700" data-i18n="btn-partners">
                         Наши партнеры
                     </a>
                 </div>
@@ -146,7 +183,7 @@
                         <h2 class="text-2xl font-bold text-white">LogiTech AI <span class="text-blue-500">v2.4</span></h2>
                     </div>
                     
-                    <p class="text-slate-400 mb-8 text-sm md:text-base">
+                    <p class="text-slate-400 mb-8 text-sm md:text-base" data-i18n="ai-desc">
                         Наша нейросеть анализирует трафик в Алматы, погодные условия и загруженность складов для оптимизации вашей доставки.
                     </p>
 
@@ -156,7 +193,7 @@
                     </div>
 
                     <button onclick="runAI()" id="aiBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl transition flex items-center justify-center gap-3">
-                        <span>Запустить оптимизацию</span>
+                        <span data-i18n="ai-btn">Запустить оптимизацию</span>
                         <i class="fas fa-bolt"></i>
                     </button>
 
@@ -181,9 +218,9 @@
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                     </span>
-                    <span class="text-sm font-bold text-green-600 uppercase tracking-widest">Live: Синхронизация с БД активна</span>
+                    <span class="text-sm font-bold text-green-600 uppercase tracking-widest" data-i18n="sync-status">Live: Синхронизация с БД активна</span>
                 </div>
-                <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-slate-900">Мониторинг партнерской сети</h2>
+                <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-slate-900" data-i18n="partners-title">Мониторинг партнерской сети</h2>
                 <div class="h-1.5 w-20 bg-blue-600 mx-auto rounded-full"></div>
             </div>
 
@@ -195,11 +232,11 @@
                             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11V7a5 5 0 0 1 10 0v4"></path><path d="M5 11h14v2a7 7 0 0 1-14 0v-2z"></path><line x1="12" y1="18" x2="12" y2="22"></line></svg>
                         </div>
                         <h3 class="font-extrabold text-lg mb-2">Doner na Satpayeva</h3>
-                        <p class="text-slate-500 text-xs mb-6">Доставка готовых блюд</p>
+                        <p class="text-slate-500 text-xs mb-6" data-i18n="cat-food">Доставка готовых блюд</p>
                     </div>
                     <div class="space-y-3 pt-4 border-t border-slate-100">
                         <div class="flex justify-between text-xs font-bold uppercase tracking-tighter">
-                            <span class="text-slate-400">Заказов сегодня:</span>
+                            <span class="text-slate-400" data-i18n="stat-orders">Заказов сегодня:</span>
                             <span class="text-orange-600" id="stat-doner">342</span>
                         </div>
                         <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
@@ -214,11 +251,11 @@
                             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#db2777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18h12v-9h-12z"></path><path d="M9 9v-3c0-1.7 1.3-3 3-3s3 1.3 3 3v3"></path><path d="M12 12v3"></path></svg>
                         </div>
                         <h3 class="font-extrabold text-lg mb-2">Mon Amie</h3>
-                        <p class="text-slate-500 text-xs mb-6">Парфюмерия и косметика</p>
+                        <p class="text-slate-500 text-xs mb-6" data-i18n="cat-beauty">Парфюмерия и косметика</p>
                     </div>
                     <div class="space-y-3 pt-4 border-t border-slate-100">
                         <div class="flex justify-between text-xs font-bold uppercase tracking-tighter">
-                            <span class="text-slate-400">Курьеров в сети:</span>
+                            <span class="text-slate-400" data-i18n="stat-couriers">Курьеров в сети:</span>
                             <span class="text-pink-600" id="stat-mon">56</span>
                         </div>
                         <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
@@ -233,11 +270,11 @@
                             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"></path><path d="M3 12c0 1.7 4 3 9 3s9-1.3 9-3"></path></svg>
                         </div>
                         <h3 class="font-extrabold text-lg mb-2">Okadzaki</h3>
-                        <p class="text-slate-500 text-xs mb-6">Морепродукты (Cold Chain)</p>
+                        <p class="text-slate-500 text-xs mb-6" data-i18n="cat-sea">Морепродукты (Cold Chain)</p>
                     </div>
                     <div class="space-y-3 pt-4 border-t border-slate-100">
                         <div class="flex justify-between text-xs font-bold uppercase tracking-tighter">
-                            <span class="text-slate-400">Темп. режим:</span>
+                            <span class="text-slate-400" data-i18n="stat-temp">Темп. режим:</span>
                             <span class="text-green-600">-18.4°C</span>
                         </div>
                         <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
@@ -255,14 +292,14 @@
                             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
                         </div>
                         <h3 class="font-extrabold text-lg mb-2">Radmir Company</h3>
-                        <p class="text-blue-200 text-xs mb-6">Премиум-дистрибуция</p>
+                        <p class="text-blue-200 text-xs mb-6" data-i18n="cat-dist">Премиум-дистрибуция</p>
                     </div>
                     <div class="space-y-3 pt-4 border-t border-blue-800">
                         <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest text-blue-300">
-                            <span>Статус партнера:</span>
+                            <span data-i18n="stat-partner">Статус партнера:</span>
                             <span class="text-blue-400">VIP GOLD</span>
                         </div>
-                        <button onclick="requestCall('Radmir Company')" class="w-full bg-blue-600 hover:bg-blue-500 py-2 rounded-xl text-xs font-bold transition">Связаться</button>
+                        <button onclick="requestCall('Radmir Company')" class="w-full bg-blue-600 hover:bg-blue-500 py-2 rounded-xl text-xs font-bold transition" data-i18n="btn-contact">Связаться</button>
                     </div>
                 </div>
 
@@ -274,18 +311,18 @@
         <div class="max-w-4xl mx-auto px-6">
             <div class="bg-white p-8 md:p-12 rounded-[3rem] shadow-xl border border-slate-100 text-center">
                 <i class="fas fa-database text-blue-600 text-4xl mb-6"></i>
-                <h2 class="text-3xl font-extrabold mb-4 text-slate-900">Интеграция с корпоративной БД</h2>
-                <p class="text-slate-500 mb-10">Введите номер вашей накладной (например, <span class="text-blue-600 font-mono">TTN-2026</span>) для получения данных из системы.</p>
+                <h2 class="text-3xl font-extrabold mb-4 text-slate-900" data-i18n="db-title">Интеграция с корпоративной БД</h2>
+                <p class="text-slate-500 mb-10" data-i18n="db-desc">Введите номер вашей накладной (например, <span class="text-blue-600 font-mono">TTN-2026</span>) для получения данных из системы.</p>
                 
                 <div class="flex flex-col md:flex-row gap-4 max-w-xl mx-auto">
                     <input type="text" id="ttnInput" placeholder="Номер ТТН..." class="tracking-input flex-1 px-6 py-4 rounded-xl bg-slate-100 border-none outline-none font-bold text-slate-700">
-                    <button onclick="checkStatus()" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold transition">Проверить</button>
+                    <button onclick="checkStatus()" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold transition" data-i18n="btn-check">Проверить</button>
                 </div>
 
                 <div id="statusResult" class="mt-12 hidden">
                     <div class="p-6 bg-blue-50 border border-blue-100 rounded-2xl flex items-center justify-center gap-6">
                         <div class="text-left">
-                            <div class="text-xs uppercase text-blue-400 font-bold tracking-widest mb-1">Статус из базы:</div>
+                            <div class="text-xs uppercase text-blue-400 font-bold tracking-widest mb-1" data-i18n="status-label">Статус из базы:</div>
                             <div class="text-xl font-extrabold text-blue-900" id="statusText">Поиск данных...</div>
                         </div>
                     </div>
@@ -295,10 +332,131 @@
     </section>
 
     <footer class="py-12 bg-slate-900 text-slate-500 text-center border-t border-white/5">
-        <p>© Разработано для дипломного проекта.</p>
+        <p data-i18n="footer">© Разработано для дипломного проекта.</p>
     </footer>
 
     <script>
+        
+        const translations = {
+            ru: {
+                "loading": "Инициализация систем ИИ...",
+                "nav-about": "О нас",
+                "nav-partners": "Партнеры",
+                "nav-tracking": "Трекинг",
+                "hero-title": 'Автоматизируем <br class="hidden sm:block"> <span class="text-blue-500 text-shadow-sm">будущее</span> перевозок',
+                "hero-desc": "Мы — технологический лидер в сфере логистики Алматы. Корпоративная база данных для вашего бизнеса.",
+                "btn-track": "Отследить груз",
+                "btn-partners": "Наши партнеры",
+                "ai-desc": "Наша нейросеть анализирует трафик в Алматы, погодные условия и загруженность складов для оптимизации вашей доставки.",
+                "ai-btn": "Запустить оптимизацию",
+                "sync-status": "Live: Синхронизация с БД активна",
+                "partners-title": "Мониторинг партнерской сети",
+                "cat-food": "Доставка готовых блюд",
+                "cat-beauty": "Парфюмерия и косметика",
+                "cat-sea": "Морепродукты (Cold Chain)",
+                "cat-dist": "Премиум-дистрибуция",
+                "stat-orders": "Заказов сегодня:",
+                "stat-couriers": "Курьеров в сети:",
+                "stat-temp": "Темп. режим:",
+                "stat-partner": "Статус партнера:",
+                "btn-contact": "Связаться",
+                "db-title": "Интеграция с корпоративной БД",
+                "db-desc": "Введите номер вашей накладной (напр. TTN-2026) для получения данных.",
+                "btn-check": "Проверить",
+                "status-label": "Статус из базы:",
+                "footer": "© Разработано для дипломного проекта."
+            },
+            en: {
+                "loading": "Initializing AI systems...",
+                "nav-about": "About",
+                "nav-partners": "Partners",
+                "nav-tracking": "Tracking",
+                "hero-title": 'Automating the <br class="hidden sm:block"> <span class="text-blue-500 text-shadow-sm">Future</span> of Logistics',
+                "hero-desc": "We are the tech leader in Almaty logistics. Corporate database solutions for your business.",
+                "btn-track": "Track Cargo",
+                "btn-partners": "Our Partners",
+                "ai-desc": "Our neural network analyzes Almaty traffic, weather, and warehouse loads to optimize your delivery.",
+                "ai-btn": "Run Optimization",
+                "sync-status": "Live: DB Sync Active",
+                "partners-title": "Partner Network Monitoring",
+                "cat-food": "Food Delivery",
+                "cat-beauty": "Perfumery & Cosmetics",
+                "cat-sea": "Seafood (Cold Chain)",
+                "cat-dist": "Premium Distribution",
+                "stat-orders": "Orders today:",
+                "stat-couriers": "Active couriers:",
+                "stat-temp": "Temp. mode:",
+                "stat-partner": "Partner Status:",
+                "btn-contact": "Contact",
+                "db-title": "Corporate DB Integration",
+                "db-desc": "Enter your waybill number (e.g. TTN-2026) to retrieve data.",
+                "btn-check": "Check Status",
+                "status-label": "Database Status:",
+                "footer": "© Developed for Diploma Project."
+            },
+            kk: {
+                "loading": "ЖИ жүйелерін инициализациялау...",
+                "nav-about": "Біз туралы",
+                "nav-partners": "Серіктестер",
+                "nav-tracking": "Трекинг",
+                "hero-title": 'Тасымал <span class="text-blue-500 text-shadow-sm">болашағын</span> <br class="hidden sm:block"> автоматтандырамыз',
+                "hero-desc": "Біз — Алматы логистика саласының технологиялық көшбасшысымыз. Сіздің бизнесіңіз үшін корпоративтік деректер қоры.",
+                "btn-track": "Жүкті қадағалау",
+                "btn-partners": "Біздің серіктестер",
+                "ai-desc": "Біздің нейрожелі жеткізуді оңтайландыру үшін Алматыдағы трафикті, ауа райын және қоймалардың жүктемесін талдайды.",
+                "ai-btn": "Оңтайландыруды бастау",
+                "sync-status": "Live: ДҚ-мен синхрондау белсенді",
+                "partners-title": "Серіктестік желі мониторингі",
+                "cat-food": "Дайын тағамдарды жеткізу",
+                "cat-beauty": "Парфюмерия және косметика",
+                "cat-sea": "Теңіз өнімдері (Cold Chain)",
+                "cat-dist": "Премиум-дистрибуция",
+                "stat-orders": "Бүгінгі тапсырыстар:",
+                "stat-couriers": "Желідегі курьерлер:",
+                "stat-temp": "Темп. режимі:",
+                "stat-partner": "Серіктес мәртебесі:",
+                "btn-contact": "Байланысу",
+                "db-title": "Корпоративтік ДҚ-мен интеграция",
+                "db-desc": "Деректерді алу үшін жүкқұжат нөмірін (мыс. TTN-2026) енгізіңіз.",
+                "btn-check": "Тексеру",
+                "status-label": "Қордағы мәртебе:",
+                "footer": "© Дипломдық жоба үшін әзірленген."
+            }
+        };
+
+        let currentLang = 'ru';
+const langOrder = ['ru', 'en', 'kk']; 
+
+function toggleLang() {
+    
+    let currentIndex = langOrder.indexOf(currentLang);
+    currentLang = langOrder[(currentIndex + 1) % langOrder.length];
+    
+    
+    document.getElementById('langBtn').innerText = currentLang.toUpperCase();
+    
+    
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[currentLang][key]) {
+            el.innerHTML = translations[currentLang][key];
+        }
+    });
+}
+
+        
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.getElementById('themeIcon');
+            body.classList.toggle('dark-mode');
+            
+            if(body.classList.contains('dark-mode')) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+            }
+        }
+
         
         const fakeDB = {
             "TTN-2026": "Груз в пути: Алматы — Астана",
@@ -313,108 +471,85 @@
             const statusText = document.getElementById('statusText');
 
             if (input === "") {
-                alert("Введите номер ТТН!");
+                alert(currentLang === 'ru' ? "Введите номер ТТН!" : "Enter TTN number!");
                 return;
             }
 
             resultDiv.classList.remove('hidden');
-            statusText.innerText = "Запрос к базе данных...";
+            statusText.innerText = currentLang === 'ru' ? "Запрос к базе данных..." : "Querying database...";
 
-            
             setTimeout(() => {
                 if (fakeDB[input]) {
                     statusText.innerText = fakeDB[input];
                 } else {
-                    statusText.innerText = "Запись не найдена. Проверьте номер.";
+                    statusText.innerText = currentLang === 'ru' ? "Запись не найдена." : "Record not found.";
                 }
             }, 800);
         }
-    </script>
 
-    <script>
-    
-    function updateLiveStats() {
-        const donerStat = document.getElementById('stat-doner');
-        const monStat = document.getElementById('stat-mon');
-        
-        if(donerStat) {
-            let current = parseInt(donerStat.innerText);
-            donerStat.innerText = current + Math.floor(Math.random() * 2);
+        function updateLiveStats() {
+            const donerStat = document.getElementById('stat-doner');
+            const monStat = document.getElementById('stat-mon');
+            if(donerStat) {
+                let current = parseInt(donerStat.innerText);
+                donerStat.innerText = current + Math.floor(Math.random() * 2);
+            }
+            if(monStat) {
+                let current = parseInt(monStat.innerText);
+                monStat.innerText = current + (Math.random() > 0.5 ? 1 : -1);
+            }
         }
-        
-        if(monStat) {
-            let current = parseInt(monStat.innerText);
-            
-            monStat.innerText = current + (Math.random() > 0.5 ? 1 : -1);
+        setInterval(updateLiveStats, 3000);
+
+        function requestCall(company) {
+            alert(currentLang === 'ru' ? `Запрос для ${company} отправлен.` : `Request for ${company} sent.`);
         }
-    }
 
-    
-    setInterval(updateLiveStats, 3000);
+        function runAI() {
+            const from = document.getElementById('aiFrom').value;
+            const to = document.getElementById('aiTo').value;
+            const btn = document.getElementById('aiBtn');
+            const result = document.getElementById('aiResult');
+            const text = document.getElementById('aiResponseText');
 
-    function requestCall(company) {
-        alert(`Запрос на обратную связь для ${company} отправлен в базу данных. Наши менеджеры свяжутся с вами в ближайшее время.`);
-    }
+            if (!from || !to) {
+                alert(currentLang === 'ru' ? "Введите пункты!" : "Enter locations!");
+                return;
+            }
 
-    function runAI() {
-    const from = document.getElementById('aiFrom').value;
-    const to = document.getElementById('aiTo').value;
-    const btn = document.getElementById('aiBtn');
-    const result = document.getElementById('aiResult');
-    const text = document.getElementById('aiResponseText');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner animate-spin"></i>';
+            result.classList.remove('hidden');
+            text.innerText = "...";
 
-    if (!from || !to) {
-        alert("Введите пункты маршрута!");
-        return;
-    }
-
-    
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fas fa-spinner animate-spin"></i> Анализ данных...';
-    result.classList.remove('hidden');
-    text.innerText = "Подключение к нейронному узлу... Сбор данных о трафике по ул. Сатпаева и Аль-Фараби...";
-
-    setTimeout(() => {
-        text.innerText = "Расчет вероятности задержек... Оптимизация расхода топлива для Radmir Company...";
-        
-        setTimeout(() => {
-            const time = Math.floor(Math.random() * (50 - 20) + 20);
-            text.innerHTML = `
-                <span class="text-green-400 font-bold uppercase block mb-2">Маршрут оптимизирован:</span>
-                • Оптимальный путь: через ВОАД<br>
-                • Расчетное время: ${time} минут<br>
-                • Экономия топлива: 14%<br>
-                • Риск задержки: Минимальный (2%)
-            `;
-            btn.disabled = false;
-            btn.innerHTML = '<span>Запустить оптимизацию</span> <i class="fas fa-bolt"></i>';
-        }, 1500);
-    }, 1500);
-}
-
-window.addEventListener('load', () => {
-    const preloader = document.getElementById('preloader');
-    const loadBar = document.getElementById('load-bar');
-    const loadPercent = document.getElementById('load-percent');
-    let width = 0;
-
-    
-    const interval = setInterval(() => {
-        if (width >= 100) {
-            clearInterval(interval);
-            
-            preloader.style.opacity = '0';
             setTimeout(() => {
-                preloader.style.display = 'none';
-            }, 700);
-        } else {
-            width += Math.floor(Math.random() * 10) + 5;
-            if (width > 100) width = 100;
-            loadBar.style.width = width + '%';
-            loadPercent.innerText = width + '%';
+                const time = Math.floor(Math.random() * (50 - 20) + 20);
+                text.innerHTML = currentLang === 'ru' ? 
+                    `Оптимальный путь: через ВОАД<br>Время: ${time} мин` : 
+                    `Optimal route: via VOAD<br>Time: ${time} min`;
+                btn.disabled = false;
+                btn.innerHTML = `<span>${translations[currentLang]['ai-btn']}</span> <i class="fas fa-bolt"></i>`;
+            }, 2000);
         }
-    }, 150);
-});
-</script>
+
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            const loadBar = document.getElementById('load-bar');
+            const loadPercent = document.getElementById('load-percent');
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    preloader.style.opacity = '0';
+                    setTimeout(() => preloader.style.display = 'none', 700);
+                } else {
+                    width += Math.floor(Math.random() * 10) + 5;
+                    if (width > 100) width = 100;
+                    loadBar.style.width = width + '%';
+                    loadPercent.innerText = width + '%';
+                }
+            }, 150);
+        });
+    </script>
 </body>
 </html>
