@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Almaty Logistics Solutions | Корпоративная автоматизация</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap');
+        
+        :root {
+            --primary: #0052CC;
+            --accent: #FF8A00;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+
+        .partner-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: white;
+            border: 1px solid #e2e8f0;
+        }
+
+        .partner-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .tracking-input:focus {
+            box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.2);
+        }
+
+        .dot-flashing {
+            position: relative;
+            width: 10px;
+            height: 10px;
+            border-radius: 5px;
+            background-color: var(--primary);
+            animation: dot-flashing 1s infinite linear alternate;
+        }
+
+        @keyframes dot-flashing {
+            0% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div id="preloader" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#0f172a] transition-opacity duration-700">
+    <div class="relative">
+        <div class="absolute -inset-4 border-2 border-blue-500/20 rounded-full animate-[ping_2s_linear_infinite]"></div>
+        <div class="absolute -inset-8 border border-blue-600/10 rounded-full animate-[ping_3s_linear_infinite]"></div>
+        
+        <div class="relative bg-blue-600 p-6 rounded-3xl shadow-2xl shadow-blue-600/40 animate-bounce">
+            <i class="fas fa-cube text-white text-5xl"></i>
+        </div>
+    </div>
+    
+    <div class="mt-12 text-center">
+        <div class="text-white font-bold tracking-[0.3em] uppercase text-sm mb-2">Almaty Logix</div>
+        <div class="flex items-center gap-2 justify-center">
+            <span class="text-blue-500 text-[10px] font-mono" id="load-percent">0%</span>
+            <div class="w-32 h-1 bg-white/10 rounded-full overflow-hidden">
+                <div id="load-bar" class="h-full bg-blue-600 w-0 transition-all duration-300"></div>
+            </div>
+        </div>
+        <div class="text-slate-500 text-[10px] mt-4 uppercase tracking-widest font-semibold">Инициализация систем ИИ...</div>
+    </div>
+</div>
+
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <i class="fas fa-cube text-blue-600 text-2xl"></i>
+                <span class="font-extrabold text-xl tracking-tighter uppercase">Almaty<span class="text-blue-600">Logix</span></span>
+            </div>
+            <div class="hidden md:flex gap-8 font-semibold text-sm uppercase tracking-wider">
+                <a href="#about" class="hover:text-blue-600 transition">О нас</a>
+                <a href="#partners" class="hover:text-blue-600 transition">Партнеры</a>
+                <a href="#tracking" class="hover:text-blue-600 transition">Трекинг</a>
+                <a href="#" class="text-blue-600 border-b-2 border-blue-600">Сотрудничество</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-gradient min-h-screen flex items-center pt-16 pb-8 overflow-hidden" id="about">
+        <div class="max-w-6xl mx-auto px-5 grid grid-cols-1 lg:grid-cols-[1.1fr,0.9fr] gap-8 lg:gap-16 items-center">
+            
+            <div class="text-center lg:text-left z-10 order-2 lg:order-1">
+                <span class="inline-block px-3 py-1 rounded-full bg-blue-600/20 text-blue-400 text-[9px] md:text-xs font-bold uppercase mb-4 tracking-widest border border-blue-600/30">
+                    Smart Logistics 2026
+                </span>
+                
+                <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-4 md:mb-6 leading-[1.15] text-white tracking-tight">
+                    Автоматизируем <br class="hidden sm:block"> 
+                    <span class="text-blue-500 text-shadow-sm">будущее</span> перевозок
+                </h1>
+                
+                <p class="text-slate-400 text-xs sm:text-base md:text-lg mb-6 md:mb-8 leading-relaxed max-w-sm sm:max-w-md mx-auto lg:mx-0">
+                    Мы — технологический лидер в сфере логистики Алматы. Корпоративная база данных для вашего бизнеса.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 px-4 sm:px-0">
+                    <a href="#tracking" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3.5 rounded-xl font-bold transition shadow-lg text-sm md:text-base">
+                        Отследить груз
+                    </a>
+                    <a href="#partners" class="bg-slate-800/50 hover:bg-slate-700 text-white px-6 py-3.5 rounded-xl font-bold transition text-sm md:text-base border border-slate-700">
+                        Наши партнеры
+                    </a>
+                </div>
+            </div>
+
+            <div class="relative mt-4 lg:mt-0 order-1 lg:order-2 scale-90 sm:scale-100">
+                <div class="absolute -inset-10 bg-blue-600/10 blur-[80px] rounded-full opacity-40"></div>
+                <div class="relative rounded-2xl overflow-hidden border border-white/5 shadow-2xl mx-auto max-w-[280px] sm:max-w-full">
+                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1000" 
+                         class="w-full h-48 sm:h-auto object-cover" 
+                         alt="Logistics">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white" id="ai-assistant">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="bg-slate-900 rounded-[3rem] p-8 md:p-12 shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+                    <svg width="100%" height="100%"><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="0.5"/></pattern><rect width="100%" height="100%" fill="url(#grid)" /></svg>
+                </div>
+
+                <div class="relative z-10">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="bg-blue-600 p-2 rounded-lg animate-pulse">
+                            <i class="fas fa-brain text-white"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-white">LogiTech AI <span class="text-blue-500">v2.4</span></h2>
+                    </div>
+                    
+                    <p class="text-slate-400 mb-8 text-sm md:text-base">
+                        Наша нейросеть анализирует трафик в Алматы, погодные условия и загруженность складов для оптимизации вашей доставки.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <input type="text" id="aiFrom" placeholder="Откуда (напр. Апорт)" class="bg-white/5 border border-white/10 rounded-xl px-5 py-3 text-white outline-none focus:border-blue-500 transition">
+                        <input type="text" id="aiTo" placeholder="Куда (напр. Медеу)" class="bg-white/5 border border-white/10 rounded-xl px-5 py-3 text-white outline-none focus:border-blue-500 transition">
+                    </div>
+
+                    <button onclick="runAI()" id="aiBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl transition flex items-center justify-center gap-3">
+                        <span>Запустить оптимизацию</span>
+                        <i class="fas fa-bolt"></i>
+                    </button>
+
+                    <div id="aiResult" class="mt-8 p-6 bg-blue-600/10 border border-blue-600/20 rounded-2xl hidden">
+                        <div class="flex items-start gap-4">
+                            <div class="dot-flashing mt-2"></div>
+                            <div class="text-left">
+                                <p id="aiResponseText" class="text-blue-100 text-sm font-mono leading-relaxed"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-white overflow-hidden" id="partners">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <div class="flex items-center justify-center gap-2 mb-4">
+                    <span class="relative flex h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                    </span>
+                    <span class="text-sm font-bold text-green-600 uppercase tracking-widest">Live: Синхронизация с БД активна</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-slate-900">Мониторинг партнерской сети</h2>
+                <div class="h-1.5 w-20 bg-blue-600 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <div class="partner-card p-8 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mb-6">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11V7a5 5 0 0 1 10 0v4"></path><path d="M5 11h14v2a7 7 0 0 1-14 0v-2z"></path><line x1="12" y1="18" x2="12" y2="22"></line></svg>
+                        </div>
+                        <h3 class="font-extrabold text-lg mb-2">Doner na Satpayeva</h3>
+                        <p class="text-slate-500 text-xs mb-6">Доставка готовых блюд</p>
+                    </div>
+                    <div class="space-y-3 pt-4 border-t border-slate-100">
+                        <div class="flex justify-between text-xs font-bold uppercase tracking-tighter">
+                            <span class="text-slate-400">Заказов сегодня:</span>
+                            <span class="text-orange-600" id="stat-doner">342</span>
+                        </div>
+                        <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-orange-500 h-full animate-pulse" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="partner-card p-8 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="w-16 h-16 bg-pink-100 rounded-2xl flex items-center justify-center mb-6">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#db2777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18h12v-9h-12z"></path><path d="M9 9v-3c0-1.7 1.3-3 3-3s3 1.3 3 3v3"></path><path d="M12 12v3"></path></svg>
+                        </div>
+                        <h3 class="font-extrabold text-lg mb-2">Mon Amie</h3>
+                        <p class="text-slate-500 text-xs mb-6">Парфюмерия и косметика</p>
+                    </div>
+                    <div class="space-y-3 pt-4 border-t border-slate-100">
+                        <div class="flex justify-between text-xs font-bold uppercase tracking-tighter">
+                            <span class="text-slate-400">Курьеров в сети:</span>
+                            <span class="text-pink-600" id="stat-mon">56</span>
+                        </div>
+                        <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-pink-500 h-full animate-pulse" style="width: 60%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="partner-card p-8 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mb-6">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"></path><path d="M3 12c0 1.7 4 3 9 3s9-1.3 9-3"></path></svg>
+                        </div>
+                        <h3 class="font-extrabold text-lg mb-2">Okadzaki</h3>
+                        <p class="text-slate-500 text-xs mb-6">Морепродукты (Cold Chain)</p>
+                    </div>
+                    <div class="space-y-3 pt-4 border-t border-slate-100">
+                        <div class="flex justify-between text-xs font-bold uppercase tracking-tighter">
+                            <span class="text-slate-400">Темп. режим:</span>
+                            <span class="text-green-600">-18.4°C</span>
+                        </div>
+                        <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-red-500 h-full animate-pulse" style="width: 95%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="partner-card p-8 rounded-[2rem] border-blue-200 bg-blue-900 text-white shadow-xl flex flex-col justify-between relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-150 transition-transform duration-700">
+                        <i class="fas fa-rocket text-6xl"></i>
+                    </div>
+                    <div>
+                        <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mb-6 backdrop-blur-md">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                        </div>
+                        <h3 class="font-extrabold text-lg mb-2">Radmir Company</h3>
+                        <p class="text-blue-200 text-xs mb-6">Премиум-дистрибуция</p>
+                    </div>
+                    <div class="space-y-3 pt-4 border-t border-blue-800">
+                        <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest text-blue-300">
+                            <span>Статус партнера:</span>
+                            <span class="text-blue-400">VIP GOLD</span>
+                        </div>
+                        <button onclick="requestCall('Radmir Company')" class="w-full bg-blue-600 hover:bg-blue-500 py-2 rounded-xl text-xs font-bold transition">Связаться</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-slate-50 border-t border-slate-200" id="tracking">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="bg-white p-8 md:p-12 rounded-[3rem] shadow-xl border border-slate-100 text-center">
+                <i class="fas fa-database text-blue-600 text-4xl mb-6"></i>
+                <h2 class="text-3xl font-extrabold mb-4 text-slate-900">Интеграция с корпоративной БД</h2>
+                <p class="text-slate-500 mb-10">Введите номер вашей накладной (например, <span class="text-blue-600 font-mono">TTN-2026</span>) для получения данных из системы.</p>
+                
+                <div class="flex flex-col md:flex-row gap-4 max-w-xl mx-auto">
+                    <input type="text" id="ttnInput" placeholder="Номер ТТН..." class="tracking-input flex-1 px-6 py-4 rounded-xl bg-slate-100 border-none outline-none font-bold text-slate-700">
+                    <button onclick="checkStatus()" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold transition">Проверить</button>
+                </div>
+
+                <div id="statusResult" class="mt-12 hidden">
+                    <div class="p-6 bg-blue-50 border border-blue-100 rounded-2xl flex items-center justify-center gap-6">
+                        <div class="text-left">
+                            <div class="text-xs uppercase text-blue-400 font-bold tracking-widest mb-1">Статус из базы:</div>
+                            <div class="text-xl font-extrabold text-blue-900" id="statusText">Поиск данных...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 bg-slate-900 text-slate-500 text-center border-t border-white/5">
+        <p>© Разработано для дипломного проекта.</p>
+    </footer>
+
+    <script>
+        
+        const fakeDB = {
+            "TTN-2026": "Груз в пути: Алматы — Астана",
+            "RADMIR-01": "Прибыло на склад: Радмир Компани",
+            "DONER-77": "Доставлено: Сатпаева 29",
+            "MON-AMIE": "Ожидание погрузки: Склад №4"
+        };
+
+        function checkStatus() {
+            const input = document.getElementById('ttnInput').value.trim().toUpperCase();
+            const resultDiv = document.getElementById('statusResult');
+            const statusText = document.getElementById('statusText');
+
+            if (input === "") {
+                alert("Введите номер ТТН!");
+                return;
+            }
+
+            resultDiv.classList.remove('hidden');
+            statusText.innerText = "Запрос к базе данных...";
+
+            
+            setTimeout(() => {
+                if (fakeDB[input]) {
+                    statusText.innerText = fakeDB[input];
+                } else {
+                    statusText.innerText = "Запись не найдена. Проверьте номер.";
+                }
+            }, 800);
+        }
+    </script>
+
+    <script>
+    
+    function updateLiveStats() {
+        const donerStat = document.getElementById('stat-doner');
+        const monStat = document.getElementById('stat-mon');
+        
+        if(donerStat) {
+            let current = parseInt(donerStat.innerText);
+            donerStat.innerText = current + Math.floor(Math.random() * 2);
+        }
+        
+        if(monStat) {
+            let current = parseInt(monStat.innerText);
+            
+            monStat.innerText = current + (Math.random() > 0.5 ? 1 : -1);
+        }
+    }
+
+    
+    setInterval(updateLiveStats, 3000);
+
+    function requestCall(company) {
+        alert(`Запрос на обратную связь для ${company} отправлен в базу данных. Наши менеджеры свяжутся с вами в ближайшее время.`);
+    }
+
+    function runAI() {
+    const from = document.getElementById('aiFrom').value;
+    const to = document.getElementById('aiTo').value;
+    const btn = document.getElementById('aiBtn');
+    const result = document.getElementById('aiResult');
+    const text = document.getElementById('aiResponseText');
+
+    if (!from || !to) {
+        alert("Введите пункты маршрута!");
+        return;
+    }
+
+    
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner animate-spin"></i> Анализ данных...';
+    result.classList.remove('hidden');
+    text.innerText = "Подключение к нейронному узлу... Сбор данных о трафике по ул. Сатпаева и Аль-Фараби...";
+
+    setTimeout(() => {
+        text.innerText = "Расчет вероятности задержек... Оптимизация расхода топлива для Radmir Company...";
+        
+        setTimeout(() => {
+            const time = Math.floor(Math.random() * (50 - 20) + 20);
+            text.innerHTML = `
+                <span class="text-green-400 font-bold uppercase block mb-2">Маршрут оптимизирован:</span>
+                • Оптимальный путь: через ВОАД<br>
+                • Расчетное время: ${time} минут<br>
+                • Экономия топлива: 14%<br>
+                • Риск задержки: Минимальный (2%)
+            `;
+            btn.disabled = false;
+            btn.innerHTML = '<span>Запустить оптимизацию</span> <i class="fas fa-bolt"></i>';
+        }, 1500);
+    }, 1500);
+}
+
+window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    const loadBar = document.getElementById('load-bar');
+    const loadPercent = document.getElementById('load-percent');
+    let width = 0;
+
+    
+    const interval = setInterval(() => {
+        if (width >= 100) {
+            clearInterval(interval);
+            
+            preloader.style.opacity = '0';
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 700);
+        } else {
+            width += Math.floor(Math.random() * 10) + 5;
+            if (width > 100) width = 100;
+            loadBar.style.width = width + '%';
+            loadPercent.innerText = width + '%';
+        }
+    }, 150);
+});
+</script>
+</body>
+</html>
