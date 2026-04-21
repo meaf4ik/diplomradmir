@@ -1,555 +1,1424 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Almaty Logistics Solutions | Корпоративная автоматизация</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap');
-        
-        :root {
-            --primary: #0052CC;
-            --accent: #FF8A00;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlmatyLogix — Корпоративная автоматизация логистики</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #f8fafc;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        
-        body.dark-mode {
-            background-color: #0f172a;
-            color: #f1f5f9;
-        }
-        body.dark-mode nav {
-            background-color: rgba(15, 23, 42, 0.8);
-            border-color: rgba(255, 255, 255, 0.1);
-        }
-        body.dark-mode .bg-white {
-            background-color: #1e293b !important;
-        }
-        body.dark-mode .text-slate-900, body.dark-mode .text-slate-800 {
-            color: #f1f5f9 !important;
-        }
-        body.dark-mode .partner-card {
-            background-color: #1e293b;
-            border-color: rgba(255, 255, 255, 0.05);
-        }
-        body.dark-mode .bg-slate-50 {
-            background-color: #0f172a !important;
-        }
-
-        .hero-gradient {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-        }
-
-        .partner-card {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            background: white;
-            border: 1px solid #e2e8f0;
-        }
-
-        .partner-card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            border-color: var(--primary);
-        }
-
-        .tracking-input:focus {
-            box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.2);
-        }
-
-        .dot-flashing {
-            position: relative;
-            width: 10px;
-            height: 10px;
-            border-radius: 5px;
-            background-color: var(--primary);
-            animation: dot-flashing 1s infinite linear alternate;
-        }
-
-        @keyframes dot-flashing {
-            0% { opacity: 0.2; }
-            100% { opacity: 1; }
-        }
-    </style>
-</head>
-<body class="text-slate-800">
-
-    <div id="preloader" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#0f172a] transition-opacity duration-700">
-    <div class="relative">
-        <div class="absolute -inset-4 border-2 border-blue-500/20 rounded-full animate-[ping_2s_linear_infinite]"></div>
-        <div class="absolute -inset-8 border border-blue-600/10 rounded-full animate-[ping_3s_linear_infinite]"></div>
-        
-        <div class="relative bg-blue-600 p-6 rounded-3xl shadow-2xl shadow-blue-600/40 animate-bounce">
-            <i class="fas fa-cube text-white text-5xl"></i>
-        </div>
-    </div>
-    
-    <div class="mt-12 text-center">
-        <div class="text-white font-bold tracking-[0.3em] uppercase text-sm mb-2">Almaty Logix</div>
-        <div class="flex items-center gap-2 justify-center">
-            <span class="text-blue-500 text-[10px] font-mono" id="load-percent">0%</span>
-            <div class="w-32 h-1 bg-white/10 rounded-full overflow-hidden">
-                <div id="load-bar" class="h-full bg-blue-600 w-0 transition-all duration-300"></div>
-            </div>
-        </div>
-        <div class="text-slate-500 text-[10px] mt-4 uppercase tracking-widest font-semibold" data-i18n="loading">Инициализация систем ИИ...</div>
-    </div>
-</div>
-
-    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <i class="fas fa-cube text-blue-600 text-2xl"></i>
-                <span class="font-extrabold text-xl tracking-tighter uppercase">Almaty<span class="text-blue-600">Logix</span></span>
-            </div>
-            
-            <div class="flex items-center gap-4">
-                <div class="hidden md:flex gap-8 font-semibold text-sm uppercase tracking-wider mr-4">
-                    <a href="#about" class="hover:text-blue-600 transition" data-i18n="nav-about">О нас</a>
-                    <a href="#partners" class="hover:text-blue-600 transition" data-i18n="nav-partners">Партнеры</a>
-                    <a href="#tracking" class="hover:text-blue-600 transition" data-i18n="nav-tracking">Трекинг</a>
-                </div>
-
-                <div class="flex items-center gap-2 border-l border-slate-200 pl-4">
-                    <button onclick="toggleLang()" class="group flex items-center gap-2 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg transition border border-slate-200 dark:bg-slate-800 dark:border-slate-700">
-                        <i class="fas fa-globe text-blue-600 text-xs"></i>
-                        <span id="langBtn" class="text-slate-700 dark:text-white text-xs font-bold uppercase tracking-widest">RU</span>
-                    </button>
-                    
-                    <button onclick="toggleTheme()" id="themeBtn" class="w-8 h-8 flex items-center justify-center rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition dark:bg-slate-800 dark:text-white">
-                        <i class="fas fa-moon" id="themeIcon"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <section class="hero-gradient min-h-screen flex items-center pt-16 pb-8 overflow-hidden" id="about">
-        <div class="max-w-6xl mx-auto px-5 grid grid-cols-1 lg:grid-cols-[1.1fr,0.9fr] gap-8 lg:gap-16 items-center">
-            
-            <div class="text-center lg:text-left z-10 order-2 lg:order-1">
-                <span class="inline-block px-3 py-1 rounded-full bg-blue-600/20 text-blue-400 text-[9px] md:text-xs font-bold uppercase mb-4 tracking-widest border border-blue-600/30">
-                    Smart Logistics 2026
-                </span>
-                
-                <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-4 md:mb-6 leading-[1.15] text-white tracking-tight" data-i18n="hero-title">
-                    Автоматизируем <br class="hidden sm:block"> 
-                    <span class="text-blue-500 text-shadow-sm">будущее</span> перевозок
-                </h1>
-                
-                <p class="text-slate-400 text-xs sm:text-base md:text-lg mb-6 md:mb-8 leading-relaxed max-w-sm sm:max-w-md mx-auto lg:mx-0" data-i18n="hero-desc">
-                    Мы — технологический лидер в сфере логистики Алматы. Корпоративная база данных для вашего бизнеса.
-                </p>
-                
-                <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 px-4 sm:px-0">
-                    <a href="#tracking" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3.5 rounded-xl font-bold transition shadow-lg text-sm md:text-base" data-i18n="btn-track">
-                        Отследить груз
-                    </a>
-                    <a href="#partners" class="bg-slate-800/50 hover:bg-slate-700 text-white px-6 py-3.5 rounded-xl font-bold transition text-sm md:text-base border border-slate-700" data-i18n="btn-partners">
-                        Наши партнеры
-                    </a>
-                </div>
-            </div>
-
-            <div class="relative mt-4 lg:mt-0 order-1 lg:order-2 scale-90 sm:scale-100">
-                <div class="absolute -inset-10 bg-blue-600/10 blur-[80px] rounded-full opacity-40"></div>
-                <div class="relative rounded-2xl overflow-hidden border border-white/5 shadow-2xl mx-auto max-w-[280px] sm:max-w-full">
-                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1000" 
-                         class="w-full h-48 sm:h-auto object-cover" 
-                         alt="Logistics">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-20 bg-white" id="ai-assistant">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="bg-slate-900 rounded-[3rem] p-8 md:p-12 shadow-2xl relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-                    <svg width="100%" height="100%"><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="0.5"/></pattern><rect width="100%" height="100%" fill="url(#grid)" /></svg>
-                </div>
-
-                <div class="relative z-10">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="bg-blue-600 p-2 rounded-lg animate-pulse">
-                            <i class="fas fa-brain text-white"></i>
-                        </div>
-                        <h2 class="text-2xl font-bold text-white">LogiTech AI <span class="text-blue-500">v2.4</span></h2>
-                    </div>
-                    
-                    <p class="text-slate-400 mb-8 text-sm md:text-base" data-i18n="ai-desc">
-                        Наша нейросеть анализирует трафик в Алматы, погодные условия и загруженность складов для оптимизации вашей доставки.
-                    </p>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                        <input type="text" id="aiFrom" placeholder="Откуда (напр. Апорт)" class="bg-white/5 border border-white/10 rounded-xl px-5 py-3 text-white outline-none focus:border-blue-500 transition">
-                        <input type="text" id="aiTo" placeholder="Куда (напр. Медеу)" class="bg-white/5 border border-white/10 rounded-xl px-5 py-3 text-white outline-none focus:border-blue-500 transition">
-                    </div>
-
-                    <button onclick="runAI()" id="aiBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl transition flex items-center justify-center gap-3">
-                        <span data-i18n="ai-btn">Запустить оптимизацию</span>
-                        <i class="fas fa-bolt"></i>
-                    </button>
-
-                    <div id="aiResult" class="mt-8 p-6 bg-blue-600/10 border border-blue-600/20 rounded-2xl hidden">
-                        <div class="flex items-start gap-4">
-                            <div class="dot-flashing mt-2"></div>
-                            <div class="text-left">
-                                <p id="aiResponseText" class="text-blue-100 text-sm font-mono leading-relaxed"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-24 bg-white overflow-hidden" id="partners">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <div class="flex items-center justify-center gap-2 mb-4">
-                    <span class="relative flex h-3 w-3">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                    </span>
-                    <span class="text-sm font-bold text-green-600 uppercase tracking-widest" data-i18n="sync-status">Live: Синхронизация с БД активна</span>
-                </div>
-                <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-slate-900" data-i18n="partners-title">Мониторинг партнерской сети</h2>
-                <div class="h-1.5 w-20 bg-blue-600 mx-auto rounded-full"></div>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                
-                <div class="partner-card p-8 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mb-6">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11V7a5 5 0 0 1 10 0v4"></path><path d="M5 11h14v2a7 7 0 0 1-14 0v-2z"></path><line x1="12" y1="18" x2="12" y2="22"></line></svg>
-                        </div>
-                        <h3 class="font-extrabold text-lg mb-2">Doner na Satpayeva</h3>
-                        <p class="text-slate-500 text-xs mb-6" data-i18n="cat-food">Доставка готовых блюд</p>
-                    </div>
-                    <div class="space-y-3 pt-4 border-t border-slate-100">
-                        <div class="flex justify-between text-xs font-bold uppercase tracking-tighter">
-                            <span class="text-slate-400" data-i18n="stat-orders">Заказов сегодня:</span>
-                            <span class="text-orange-600" id="stat-doner">342</span>
-                        </div>
-                        <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
-                            <div class="bg-orange-500 h-full animate-pulse" style="width: 85%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="partner-card p-8 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="w-16 h-16 bg-pink-100 rounded-2xl flex items-center justify-center mb-6">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#db2777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18h12v-9h-12z"></path><path d="M9 9v-3c0-1.7 1.3-3 3-3s3 1.3 3 3v3"></path><path d="M12 12v3"></path></svg>
-                        </div>
-                        <h3 class="font-extrabold text-lg mb-2">Mon Amie</h3>
-                        <p class="text-slate-500 text-xs mb-6" data-i18n="cat-beauty">Парфюмерия и косметика</p>
-                    </div>
-                    <div class="space-y-3 pt-4 border-t border-slate-100">
-                        <div class="flex justify-between text-xs font-bold uppercase tracking-tighter">
-                            <span class="text-slate-400" data-i18n="stat-couriers">Курьеров в сети:</span>
-                            <span class="text-pink-600" id="stat-mon">56</span>
-                        </div>
-                        <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
-                            <div class="bg-pink-500 h-full animate-pulse" style="width: 60%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="partner-card p-8 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mb-6">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"></path><path d="M3 12c0 1.7 4 3 9 3s9-1.3 9-3"></path></svg>
-                        </div>
-                        <h3 class="font-extrabold text-lg mb-2">Okadzaki</h3>
-                        <p class="text-slate-500 text-xs mb-6" data-i18n="cat-sea">Морепродукты (Cold Chain)</p>
-                    </div>
-                    <div class="space-y-3 pt-4 border-t border-slate-100">
-                        <div class="flex justify-between text-xs font-bold uppercase tracking-tighter">
-                            <span class="text-slate-400" data-i18n="stat-temp">Темп. режим:</span>
-                            <span class="text-green-600">-18.4°C</span>
-                        </div>
-                        <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
-                            <div class="bg-red-500 h-full animate-pulse" style="width: 95%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="partner-card p-8 rounded-[2rem] border-blue-200 bg-blue-900 text-white shadow-xl flex flex-col justify-between relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-150 transition-transform duration-700">
-                        <i class="fas fa-rocket text-6xl"></i>
-                    </div>
-                    <div>
-                        <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mb-6 backdrop-blur-md">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-                        </div>
-                        <h3 class="font-extrabold text-lg mb-2">Radmir Company</h3>
-                        <p class="text-blue-200 text-xs mb-6" data-i18n="cat-dist">Премиум-дистрибуция</p>
-                    </div>
-                    <div class="space-y-3 pt-4 border-t border-blue-800">
-                        <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest text-blue-300">
-                            <span data-i18n="stat-partner">Статус партнера:</span>
-                            <span class="text-blue-400">VIP GOLD</span>
-                        </div>
-                        <button onclick="requestCall('Radmir Company')" class="w-full bg-blue-600 hover:bg-blue-500 py-2 rounded-xl text-xs font-bold transition" data-i18n="btn-contact">Связаться</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section class="py-24 bg-slate-50 border-t border-slate-200" id="tracking">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="bg-white p-8 md:p-12 rounded-[3rem] shadow-xl border border-slate-100 text-center">
-                <i class="fas fa-database text-blue-600 text-4xl mb-6"></i>
-                <h2 class="text-3xl font-extrabold mb-4 text-slate-900" data-i18n="db-title">Интеграция с корпоративной БД</h2>
-                <p class="text-slate-500 mb-10" data-i18n="db-desc">Введите номер вашей накладной (например, <span class="text-blue-600 font-mono">TTN-2026</span>) для получения данных из системы.</p>
-                
-                <div class="flex flex-col md:flex-row gap-4 max-w-xl mx-auto">
-                    <input type="text" id="ttnInput" placeholder="Номер ТТН..." class="tracking-input flex-1 px-6 py-4 rounded-xl bg-slate-100 border-none outline-none font-bold text-slate-700">
-                    <button onclick="checkStatus()" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold transition" data-i18n="btn-check">Проверить</button>
-                </div>
-
-                <div id="statusResult" class="mt-12 hidden">
-                    <div class="p-6 bg-blue-50 border border-blue-100 rounded-2xl flex items-center justify-center gap-6">
-                        <div class="text-left">
-                            <div class="text-xs uppercase text-blue-400 font-bold tracking-widest mb-1" data-i18n="status-label">Статус из базы:</div>
-                            <div class="text-xl font-extrabold text-blue-900" id="statusText">Поиск данных...</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="py-12 bg-slate-900 text-slate-500 text-center border-t border-white/5">
-        <p data-i18n="footer">© Разработано для дипломного проекта.</p>
-    </footer>
-
-    <script>
-        
-        const translations = {
-            ru: {
-                "loading": "Инициализация систем ИИ...",
-                "nav-about": "О нас",
-                "nav-partners": "Партнеры",
-                "nav-tracking": "Трекинг",
-                "hero-title": 'Автоматизируем <br class="hidden sm:block"> <span class="text-blue-500 text-shadow-sm">будущее</span> перевозок',
-                "hero-desc": "Мы — технологический лидер в сфере логистики Алматы. Корпоративная база данных для вашего бизнеса.",
-                "btn-track": "Отследить груз",
-                "btn-partners": "Наши партнеры",
-                "ai-desc": "Наша нейросеть анализирует трафик в Алматы, погодные условия и загруженность складов для оптимизации вашей доставки.",
-                "ai-btn": "Запустить оптимизацию",
-                "sync-status": "Live: Синхронизация с БД активна",
-                "partners-title": "Мониторинг партнерской сети",
-                "cat-food": "Доставка готовых блюд",
-                "cat-beauty": "Парфюмерия и косметика",
-                "cat-sea": "Морепродукты (Cold Chain)",
-                "cat-dist": "Премиум-дистрибуция",
-                "stat-orders": "Заказов сегодня:",
-                "stat-couriers": "Курьеров в сети:",
-                "stat-temp": "Темп. режим:",
-                "stat-partner": "Статус партнера:",
-                "btn-contact": "Связаться",
-                "db-title": "Интеграция с корпоративной БД",
-                "db-desc": "Введите номер вашей накладной (напр. TTN-2026) для получения данных.",
-                "btn-check": "Проверить",
-                "status-label": "Статус из базы:",
-                "footer": "© Разработано для дипломного проекта."
-            },
-            en: {
-                "loading": "Initializing AI systems...",
-                "nav-about": "About",
-                "nav-partners": "Partners",
-                "nav-tracking": "Tracking",
-                "hero-title": 'Automating the <br class="hidden sm:block"> <span class="text-blue-500 text-shadow-sm">Future</span> of Logistics',
-                "hero-desc": "We are the tech leader in Almaty logistics. Corporate database solutions for your business.",
-                "btn-track": "Track Cargo",
-                "btn-partners": "Our Partners",
-                "ai-desc": "Our neural network analyzes Almaty traffic, weather, and warehouse loads to optimize your delivery.",
-                "ai-btn": "Run Optimization",
-                "sync-status": "Live: DB Sync Active",
-                "partners-title": "Partner Network Monitoring",
-                "cat-food": "Food Delivery",
-                "cat-beauty": "Perfumery & Cosmetics",
-                "cat-sea": "Seafood (Cold Chain)",
-                "cat-dist": "Premium Distribution",
-                "stat-orders": "Orders today:",
-                "stat-couriers": "Active couriers:",
-                "stat-temp": "Temp. mode:",
-                "stat-partner": "Partner Status:",
-                "btn-contact": "Contact",
-                "db-title": "Corporate DB Integration",
-                "db-desc": "Enter your waybill number (e.g. TTN-2026) to retrieve data.",
-                "btn-check": "Check Status",
-                "status-label": "Database Status:",
-                "footer": "© Developed for Diploma Project."
-            },
-            kk: {
-                "loading": "ЖИ жүйелерін инициализациялау...",
-                "nav-about": "Біз туралы",
-                "nav-partners": "Серіктестер",
-                "nav-tracking": "Трекинг",
-                "hero-title": 'Тасымал <span class="text-blue-500 text-shadow-sm">болашағын</span> <br class="hidden sm:block"> автоматтандырамыз',
-                "hero-desc": "Біз — Алматы логистика саласының технологиялық көшбасшысымыз. Сіздің бизнесіңіз үшін корпоративтік деректер қоры.",
-                "btn-track": "Жүкті қадағалау",
-                "btn-partners": "Біздің серіктестер",
-                "ai-desc": "Біздің нейрожелі жеткізуді оңтайландыру үшін Алматыдағы трафикті, ауа райын және қоймалардың жүктемесін талдайды.",
-                "ai-btn": "Оңтайландыруды бастау",
-                "sync-status": "Live: ДҚ-мен синхрондау белсенді",
-                "partners-title": "Серіктестік желі мониторингі",
-                "cat-food": "Дайын тағамдарды жеткізу",
-                "cat-beauty": "Парфюмерия және косметика",
-                "cat-sea": "Теңіз өнімдері (Cold Chain)",
-                "cat-dist": "Премиум-дистрибуция",
-                "stat-orders": "Бүгінгі тапсырыстар:",
-                "stat-couriers": "Желідегі курьерлер:",
-                "stat-temp": "Темп. режимі:",
-                "stat-partner": "Серіктес мәртебесі:",
-                "btn-contact": "Байланысу",
-                "db-title": "Корпоративтік ДҚ-мен интеграция",
-                "db-desc": "Деректерді алу үшін жүкқұжат нөмірін (мыс. TTN-2026) енгізіңіз.",
-                "btn-check": "Тексеру",
-                "status-label": "Қордағы мәртебе:",
-                "footer": "© Дипломдық жоба үшін әзірленген."
-            }
-        };
-
-        let currentLang = 'ru';
-const langOrder = ['ru', 'en', 'kk']; 
-
-function toggleLang() {
-    
-    let currentIndex = langOrder.indexOf(currentLang);
-    currentLang = langOrder[(currentIndex + 1) % langOrder.length];
-    
-    
-    document.getElementById('langBtn').innerText = currentLang.toUpperCase();
-    
-    
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations[currentLang][key]) {
-            el.innerHTML = translations[currentLang][key];
-        }
-    });
+:root {
+  --bg:        #060a12;
+  --surface:   #0d1422;
+  --card:      #111827;
+  --border:    rgba(255,255,255,0.07);
+  --primary:   #2563eb;
+  --primary-l: #3b82f6;
+  --accent:    #06b6d4;
+  --gold:      #f59e0b;
+  --text:      #f1f5f9;
+  --muted:     #64748b;
+  --green:     #10b981;
+  --red-c:     #ef4444;
+  --font-head: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+  --radius:    1.5rem;
+  --nav-h:     72px;
 }
 
-        
-        function toggleTheme() {
-            const body = document.body;
-            const icon = document.getElementById('themeIcon');
-            body.classList.toggle('dark-mode');
-            
-            if(body.classList.contains('dark-mode')) {
-                icon.classList.replace('fa-moon', 'fa-sun');
-            } else {
-                icon.classList.replace('fa-sun', 'fa-moon');
-            }
-        }
+html { scroll-behavior: smooth; }
 
-        
-        const fakeDB = {
-            "TTN-2026": "Груз в пути: Алматы — Астана",
-            "RADMIR-01": "Прибыло на склад: Радмир Компани",
-            "DONER-77": "Доставлено: Сатпаева 29",
-            "MON-AMIE": "Ожидание погрузки: Склад №4"
-        };
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
 
-        function checkStatus() {
-            const input = document.getElementById('ttnInput').value.trim().toUpperCase();
-            const resultDiv = document.getElementById('statusResult');
-            const statusText = document.getElementById('statusText');
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 2px; }
 
-            if (input === "") {
-                alert(currentLang === 'ru' ? "Введите номер ТТН!" : "Enter TTN number!");
-                return;
-            }
+/* ── PRELOADER ── */
+#preloader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--bg);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2rem;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+#preloader.hide { opacity: 0; visibility: hidden; }
 
-            resultDiv.classList.remove('hidden');
-            statusText.innerText = currentLang === 'ru' ? "Запрос к базе данных..." : "Querying database...";
+.pre-logo {
+  display: flex; align-items: center; gap: .75rem;
+  font-family: var(--font-head); font-size: 1.75rem; font-weight: 800; color: var(--text);
+}
+.pre-logo span { color: var(--primary-l); }
 
-            setTimeout(() => {
-                if (fakeDB[input]) {
-                    statusText.innerText = fakeDB[input];
-                } else {
-                    statusText.innerText = currentLang === 'ru' ? "Запись не найдена." : "Record not found.";
-                }
-            }, 800);
-        }
+.pre-bar-wrap {
+  width: 240px; height: 2px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 9999px; overflow: hidden;
+}
+.pre-bar {
+  height: 100%; width: 0;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  border-radius: 9999px;
+  transition: width .25s ease;
+}
+.pre-pct {
+  font-family: var(--font-mono); font-size: .7rem;
+  color: var(--muted); letter-spacing: .15em;
+}
+.pre-ring {
+  width: 64px; height: 64px; position: relative;
+}
+.pre-ring::before, .pre-ring::after {
+  content: ''; position: absolute; inset: 0;
+  border-radius: 50%;
+  border: 2px solid transparent;
+}
+.pre-ring::before {
+  border-top-color: var(--primary);
+  animation: spin 1s linear infinite;
+}
+.pre-ring::after {
+  border-bottom-color: var(--accent);
+  animation: spin 1.5s linear infinite reverse;
+  inset: 8px;
+}
+.pre-icon {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.25rem; color: var(--primary-l);
+}
+@keyframes spin { to { transform: rotate(360deg); } }
 
-        function updateLiveStats() {
-            const donerStat = document.getElementById('stat-doner');
-            const monStat = document.getElementById('stat-mon');
-            if(donerStat) {
-                let current = parseInt(donerStat.innerText);
-                donerStat.innerText = current + Math.floor(Math.random() * 2);
-            }
-            if(monStat) {
-                let current = parseInt(monStat.innerText);
-                monStat.innerText = current + (Math.random() > 0.5 ? 1 : -1);
-            }
-        }
-        setInterval(updateLiveStats, 3000);
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: var(--nav-h);
+  background: rgba(6,10,18,.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center;
+}
+.nav-inner {
+  max-width: 1280px; margin: 0 auto; padding: 0 2rem;
+  width: 100%;
+  display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: .6rem;
+  font-family: var(--font-head); font-weight: 800; font-size: 1.15rem;
+  color: var(--text); text-decoration: none; white-space: nowrap;
+}
+.nav-logo .dot { color: var(--primary-l); }
+.nav-logo-icon {
+  width: 34px; height: 34px;
+  background: var(--primary);
+  border-radius: .6rem;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .85rem; color: #fff;
+  flex-shrink: 0;
+}
+.nav-links {
+  display: flex; align-items: center; gap: 2rem;
+  list-style: none;
+}
+.nav-links a {
+  font-size: .8rem; font-weight: 500; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--muted);
+  text-decoration: none; transition: color .2s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-actions { display: flex; align-items: center; gap: .75rem; }
 
-        function requestCall(company) {
-            alert(currentLang === 'ru' ? `Запрос для ${company} отправлен.` : `Request for ${company} sent.`);
-        }
+.btn-pill {
+  display: inline-flex; align-items: center; gap: .4rem;
+  padding: .45rem .9rem; border-radius: 9999px;
+  font-size: .75rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  cursor: pointer; border: none; outline: none;
+  background: rgba(255,255,255,.05);
+  color: var(--muted);
+  transition: background .2s, color .2s;
+}
+.btn-pill:hover { background: rgba(255,255,255,.1); color: var(--text); }
 
-        function runAI() {
-            const from = document.getElementById('aiFrom').value;
-            const to = document.getElementById('aiTo').value;
-            const btn = document.getElementById('aiBtn');
-            const result = document.getElementById('aiResult');
-            const text = document.getElementById('aiResponseText');
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: .5rem;
+}
+.hamburger span {
+  display: block; width: 22px; height: 2px;
+  background: var(--muted); border-radius: 9999px;
+  transition: all .3s;
+}
 
-            if (!from || !to) {
-                alert(currentLang === 'ru' ? "Введите пункты!" : "Enter locations!");
-                return;
-            }
+.mobile-menu {
+  display: none; position: fixed;
+  top: var(--nav-h); left: 0; right: 0;
+  background: rgba(6,10,18,.97);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 1.5rem 2rem;
+  z-index: 99; flex-direction: column; gap: 1rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-size: .9rem; font-weight: 500; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--muted);
+  text-decoration: none; padding: .5rem 0;
+  border-bottom: 1px solid var(--border);
+}
 
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner animate-spin"></i>';
-            result.classList.remove('hidden');
-            text.innerText = "...";
+/* ── UTILS ── */
+.section { padding: 7rem 0; }
+.container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+.badge {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .35rem .85rem; border-radius: 9999px;
+  font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  background: rgba(37,99,235,.12); color: var(--primary-l);
+  border: 1px solid rgba(37,99,235,.25);
+}
+.badge-green { background: rgba(16,185,129,.1); color: var(--green); border-color: rgba(16,185,129,.2); }
+.section-title {
+  font-family: var(--font-head); font-size: clamp(2rem,4vw,3.25rem);
+  font-weight: 800; line-height: 1.1;
+}
+.section-sub {
+  color: var(--muted); font-size: 1rem; max-width: 520px; line-height: 1.7; margin-top: .75rem;
+}
+.divider { width: 48px; height: 3px; background: var(--primary); border-radius: 9999px; margin-top: 1.25rem; }
 
-            setTimeout(() => {
-                const time = Math.floor(Math.random() * (50 - 20) + 20);
-                text.innerHTML = currentLang === 'ru' ? 
-                    `Оптимальный путь: через ВОАД<br>Время: ${time} мин` : 
-                    `Optimal route: via VOAD<br>Time: ${time} min`;
-                btn.disabled = false;
-                btn.innerHTML = `<span>${translations[currentLang]['ai-btn']}</span> <i class="fas fa-bolt"></i>`;
-            }, 2000);
-        }
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  padding-top: var(--nav-h);
+  display: flex; align-items: center;
+  position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 60% 60% at 70% 40%, rgba(37,99,235,.12) 0%, transparent 70%),
+              radial-gradient(ellipse 40% 40% at 20% 80%, rgba(6,182,212,.08) 0%, transparent 60%);
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at 50% 50%, black 30%, transparent 80%);
+}
+.hero-inner {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+  align-items: center; width: 100%; max-width: 1280px; margin: 0 auto; padding: 4rem 2rem;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: .7rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1.5rem;
+}
+.hero-tag-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+  animation: pulse 2s ease infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .5; transform: scale(1.5); }
+}
+h1.hero-title {
+  font-family: var(--font-head); font-size: clamp(2.8rem,5vw,4.5rem);
+  font-weight: 800; line-height: 1.05; letter-spacing: -.02em;
+  color: var(--text); margin-bottom: 1.5rem;
+}
+h1.hero-title em { font-style: normal; color: var(--primary-l); }
+.hero-desc {
+  color: var(--muted); font-size: 1.05rem; line-height: 1.75;
+  max-width: 440px; margin-bottom: 2.5rem;
+}
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: .6rem;
+  padding: .85rem 1.75rem; border-radius: .875rem;
+  background: var(--primary); color: #fff;
+  font-family: var(--font-head); font-size: .875rem; font-weight: 700;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: background .2s, transform .15s, box-shadow .2s;
+  box-shadow: 0 8px 24px rgba(37,99,235,.35);
+}
+.btn-primary:hover { background: var(--primary-l); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(37,99,235,.45); }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: .6rem;
+  padding: .85rem 1.75rem; border-radius: .875rem;
+  background: transparent; color: var(--text);
+  font-family: var(--font-head); font-size: .875rem; font-weight: 700;
+  text-decoration: none; border: 1px solid var(--border); cursor: pointer;
+  transition: border-color .2s, background .2s, transform .15s;
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,.2); background: rgba(255,255,255,.04); transform: translateY(-2px); }
 
-        window.addEventListener('load', () => {
-            const preloader = document.getElementById('preloader');
-            const loadBar = document.getElementById('load-bar');
-            const loadPercent = document.getElementById('load-percent');
-            let width = 0;
-            const interval = setInterval(() => {
-                if (width >= 100) {
-                    clearInterval(interval);
-                    preloader.style.opacity = '0';
-                    setTimeout(() => preloader.style.display = 'none', 700);
-                } else {
-                    width += Math.floor(Math.random() * 10) + 5;
-                    if (width > 100) width = 100;
-                    loadBar.style.width = width + '%';
-                    loadPercent.innerText = width + '%';
-                }
-            }, 150);
-        });
-    </script>
+.hero-stats {
+  display: flex; gap: 2.5rem; margin-top: 3rem; flex-wrap: wrap;
+}
+.hstat { display: flex; flex-direction: column; gap: .2rem; }
+.hstat-num {
+  font-family: var(--font-head); font-size: 1.75rem; font-weight: 800;
+  color: var(--text); line-height: 1;
+}
+.hstat-num .accent { color: var(--primary-l); }
+.hstat-label { font-size: .72rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+
+/* ── DASHBOARD CARD ── */
+.hero-dashboard {
+  position: relative;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,.6);
+}
+.dash-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,.02);
+}
+.dash-title {
+  font-family: var(--font-mono); font-size: .72rem; font-weight: 500;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+}
+.dash-live {
+  display: flex; align-items: center; gap: .4rem;
+  font-family: var(--font-mono); font-size: .65rem; color: var(--green);
+}
+.live-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--green);
+  animation: pulse 1.5s ease infinite;
+}
+.dash-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+
+.db-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+}
+.db-metric {
+  background: rgba(255,255,255,.03); border: 1px solid var(--border);
+  border-radius: .875rem; padding: 1rem;
+}
+.db-metric-label {
+  font-family: var(--font-mono); font-size: .6rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: .35rem;
+}
+.db-metric-val {
+  font-family: var(--font-head); font-size: 1.35rem; font-weight: 700;
+  color: var(--text); line-height: 1;
+}
+.db-metric-val.green { color: var(--green); }
+.db-metric-val.blue { color: var(--primary-l); }
+.db-metric-val.amber { color: var(--gold); }
+
+.db-activity { display: flex; flex-direction: column; gap: .6rem; }
+.db-activity-row {
+  display: flex; align-items: center; gap: .75rem;
+  padding: .65rem .875rem;
+  background: rgba(255,255,255,.025); border-radius: .75rem;
+  border: 1px solid var(--border);
+  animation: fadeIn .4s ease both;
+}
+@keyframes fadeIn { from { opacity:0; transform: translateY(6px); } to { opacity:1; transform:none; } }
+.db-activity-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+}
+.db-activity-text { font-size: .75rem; color: var(--muted); flex: 1; }
+.db-activity-time { font-family: var(--font-mono); font-size: .6rem; color: var(--muted); }
+
+.mini-chart { padding: 1rem 1.5rem 1.5rem; }
+.mini-chart-label {
+  font-family: var(--font-mono); font-size: .6rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: .75rem;
+}
+.bars { display: flex; align-items: flex-end; gap: 6px; height: 56px; }
+.bar-item { flex: 1; border-radius: 3px 3px 0 0; transition: height .4s ease; }
+
+/* ── BENEFITS ── */
+#benefits { background: var(--surface); }
+.benefits-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 4rem;
+}
+.benefit-card {
+  padding: 2rem; border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--card);
+  transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+  position: relative; overflow: hidden;
+}
+.benefit-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  opacity: 0; transition: opacity .3s;
+}
+.benefit-card:hover { transform: translateY(-6px); border-color: rgba(37,99,235,.3); box-shadow: 0 20px 50px rgba(0,0,0,.35); }
+.benefit-card:hover::before { opacity: 1; }
+.benefit-icon {
+  width: 52px; height: 52px; border-radius: .875rem;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.25rem; margin-bottom: 1.25rem;
+  background: rgba(37,99,235,.12); color: var(--primary-l);
+}
+.benefit-card:nth-child(2) .benefit-icon { background: rgba(6,182,212,.1); color: var(--accent); }
+.benefit-card:nth-child(3) .benefit-icon { background: rgba(16,185,129,.1); color: var(--green); }
+.benefit-card:nth-child(4) .benefit-icon { background: rgba(245,158,11,.1); color: var(--gold); }
+.benefit-card:nth-child(5) .benefit-icon { background: rgba(239,68,68,.1); color: var(--red-c); }
+.benefit-card:nth-child(6) .benefit-icon { background: rgba(139,92,246,.1); color: #8b5cf6; }
+.benefit-title {
+  font-family: var(--font-head); font-size: 1.05rem; font-weight: 700;
+  margin-bottom: .5rem;
+}
+.benefit-text { font-size: .875rem; color: var(--muted); line-height: 1.65; }
+
+/* ── AI SECTION ── */
+#ai { position: relative; overflow: hidden; }
+.ai-glow {
+  position: absolute; width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(37,99,235,.1), transparent 70%);
+  border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  pointer-events: none;
+}
+.ai-card {
+  max-width: 860px; margin: 4rem auto 0;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  position: relative; z-index: 1;
+  box-shadow: 0 40px 100px rgba(0,0,0,.5);
+}
+.ai-card-header {
+  padding: 1.75rem 2rem; border-bottom: 1px solid var(--border);
+  background: rgba(37,99,235,.06);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.ai-title-wrap { display: flex; align-items: center; gap: 1rem; }
+.ai-icon {
+  width: 44px; height: 44px; background: var(--primary); border-radius: .75rem;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 1.1rem; flex-shrink: 0;
+  animation: glow-pulse 3s ease infinite;
+}
+@keyframes glow-pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(37,99,235,.4); }
+  50% { box-shadow: 0 0 0 8px rgba(37,99,235,0); }
+}
+.ai-name { font-family: var(--font-head); font-size: 1.15rem; font-weight: 800; }
+.ai-version { font-family: var(--font-mono); font-size: .65rem; color: var(--primary-l); margin-top: .1rem; }
+.ai-badge-live { display: flex; align-items: center; gap: .4rem; font-size: .68rem; font-weight: 600; color: var(--green); }
+
+.ai-card-body { padding: 2rem; }
+.ai-desc { color: var(--muted); font-size: .9rem; margin-bottom: 1.75rem; line-height: 1.7; }
+
+.ai-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem; }
+.ai-input-wrap { position: relative; }
+.ai-input-wrap label { display: block; font-family: var(--font-mono); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: .4rem; }
+.ai-input {
+  width: 100%; padding: .85rem 1rem .85rem 2.75rem;
+  background: rgba(255,255,255,.04); border: 1px solid var(--border);
+  border-radius: .75rem; color: var(--text);
+  font-family: var(--font-body); font-size: .875rem;
+  outline: none; transition: border-color .2s, background .2s;
+}
+.ai-input:focus { border-color: rgba(37,99,235,.5); background: rgba(37,99,235,.06); }
+.ai-input::placeholder { color: rgba(100,116,139,.5); }
+.ai-input-icon { position: absolute; left: .875rem; bottom: .875rem; color: var(--muted); font-size: .8rem; }
+
+.btn-ai {
+  width: 100%; padding: 1rem; border-radius: .875rem;
+  background: var(--primary); color: #fff; border: none; cursor: pointer;
+  font-family: var(--font-head); font-size: .9rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; gap: .6rem;
+  transition: background .2s, transform .15s, box-shadow .2s;
+  box-shadow: 0 8px 24px rgba(37,99,235,.3);
+}
+.btn-ai:hover:not(:disabled) { background: var(--primary-l); transform: translateY(-1px); box-shadow: 0 12px 32px rgba(37,99,235,.45); }
+.btn-ai:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+.ai-result {
+  margin-top: 1.5rem; padding: 1.5rem;
+  background: rgba(37,99,235,.06); border: 1px solid rgba(37,99,235,.2);
+  border-radius: .875rem; display: none;
+}
+.ai-result.show { display: block; }
+.ai-result-header {
+  display: flex; align-items: center; gap: .6rem;
+  font-family: var(--font-mono); font-size: .65rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--primary-l); margin-bottom: 1rem;
+}
+.ai-result-body {
+  font-family: var(--font-mono); font-size: .8rem; color: var(--text);
+  line-height: 1.9;
+}
+.ai-result-body strong { color: var(--accent); font-weight: 500; }
+
+/* ── PARTNERS ── */
+#partners { background: var(--surface); }
+.partners-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 4rem;
+}
+.partner-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.75rem;
+  display: flex; flex-direction: column; gap: 1.25rem;
+  transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+  position: relative; overflow: hidden;
+}
+.partner-card:hover { transform: translateY(-6px); border-color: rgba(37,99,235,.3); box-shadow: 0 24px 60px rgba(0,0,0,.4); }
+.partner-card.vip {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  border-color: rgba(245,158,11,.25);
+}
+.partner-card.vip:hover { border-color: var(--gold); }
+
+.p-logo-wrap {
+  width: 52px; height: 52px; border-radius: .875rem;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.p-name { font-family: var(--font-head); font-size: 1rem; font-weight: 700; }
+.p-cat { font-size: .72rem; color: var(--muted); margin-top: .15rem; }
+.p-divider { height: 1px; background: var(--border); }
+.p-stats { display: flex; flex-direction: column; gap: .65rem; }
+.p-stat-row { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+.p-stat-label { font-family: var(--font-mono); font-size: .6rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.p-stat-val { font-family: var(--font-mono); font-size: .75rem; font-weight: 500; }
+.p-bar { height: 3px; background: rgba(255,255,255,.06); border-radius: 9999px; overflow: hidden; }
+.p-bar-fill { height: 100%; border-radius: 9999px; transition: width 1s ease; }
+
+.vip-badge {
+  display: inline-flex; align-items: center; gap: .35rem;
+  padding: .25rem .65rem; border-radius: 9999px;
+  font-size: .6rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  background: rgba(245,158,11,.15); color: var(--gold);
+  border: 1px solid rgba(245,158,11,.25);
+}
+
+/* ── TRACKING / DB ── */
+#tracking { }
+.tracking-wrap {
+  max-width: 760px; margin: 4rem auto 0;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,.4);
+}
+.tracking-header {
+  padding: 2rem; border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,.02);
+}
+.tracking-title { font-family: var(--font-head); font-size: 1.4rem; font-weight: 800; }
+.tracking-sub { color: var(--muted); font-size: .875rem; margin-top: .4rem; }
+.tracking-body { padding: 2rem; }
+
+.ttn-row { display: flex; gap: 1rem; }
+.ttn-input-wrap { position: relative; flex: 1; }
+.ttn-input {
+  width: 100%; padding: .95rem 1rem .95rem 3rem;
+  background: rgba(255,255,255,.04); border: 1px solid var(--border);
+  border-radius: .875rem; color: var(--text);
+  font-family: var(--font-mono); font-size: .875rem; letter-spacing: .05em;
+  outline: none; transition: border-color .2s, background .2s;
+}
+.ttn-input:focus { border-color: rgba(37,99,235,.5); background: rgba(37,99,235,.06); }
+.ttn-input::placeholder { color: rgba(100,116,139,.4); font-family: var(--font-body); letter-spacing: 0; }
+.ttn-input-icon { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: .875rem; }
+.btn-check {
+  padding: .95rem 1.75rem; border-radius: .875rem;
+  background: var(--primary); color: #fff; border: none; cursor: pointer;
+  font-family: var(--font-head); font-size: .875rem; font-weight: 700;
+  white-space: nowrap;
+  transition: background .2s, transform .15s;
+  box-shadow: 0 4px 16px rgba(37,99,235,.3);
+}
+.btn-check:hover { background: var(--primary-l); transform: translateY(-1px); }
+
+.ttn-hint {
+  margin-top: .75rem;
+  font-family: var(--font-mono); font-size: .7rem; color: var(--muted);
+}
+.ttn-hint code { color: var(--primary-l); }
+
+.ttn-result {
+  margin-top: 1.75rem; display: none;
+}
+.ttn-result.show { display: block; animation: fadeIn .3s ease; }
+.ttn-result-inner {
+  padding: 1.5rem; border-radius: .875rem;
+  border: 1px solid rgba(37,99,235,.2);
+  background: rgba(37,99,235,.06);
+}
+.ttn-result-status {
+  display: flex; align-items: center; gap: .75rem; margin-bottom: 1rem;
+}
+.status-icon {
+  width: 40px; height: 40px; border-radius: .625rem;
+  background: rgba(37,99,235,.15); display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; color: var(--primary-l); flex-shrink: 0;
+}
+.status-label { font-family: var(--font-mono); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.status-text { font-family: var(--font-head); font-size: 1.05rem; font-weight: 700; margin-top: .1rem; }
+.ttn-meta {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+  padding-top: 1rem; border-top: 1px solid var(--border);
+}
+.ttn-meta-item { }
+.ttn-meta-label { font-family: var(--font-mono); font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: .25rem; }
+.ttn-meta-val { font-family: var(--font-mono); font-size: .8rem; color: var(--text); font-weight: 500; }
+
+.db-table-wrap { margin-top: 1.75rem; }
+.db-table-label { font-family: var(--font-mono); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: .75rem; }
+.db-table { width: 100%; border-collapse: collapse; font-size: .78rem; }
+.db-table th {
+  text-align: left; padding: .5rem .75rem;
+  font-family: var(--font-mono); font-size: .6rem; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--muted); border-bottom: 1px solid var(--border); font-weight: 500;
+}
+.db-table td { padding: .65rem .75rem; border-bottom: 1px solid var(--border); color: var(--text); font-family: var(--font-mono); }
+.db-table tr:last-child td { border-bottom: none; }
+.db-table tr:hover td { background: rgba(255,255,255,.02); }
+.db-pill {
+  display: inline-block; padding: .2rem .55rem; border-radius: 9999px;
+  font-size: .6rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+}
+.db-pill.transit { background: rgba(245,158,11,.12); color: var(--gold); }
+.db-pill.arrived { background: rgba(16,185,129,.12); color: var(--green); }
+.db-pill.waiting { background: rgba(37,99,235,.12); color: var(--primary-l); }
+.db-pill.delivered { background: rgba(16,185,129,.15); color: var(--green); }
+
+/* ── CTA ── */
+#cta { background: var(--surface); }
+.cta-wrap {
+  max-width: 760px; margin: 0 auto; text-align: center;
+}
+.cta-title { font-family: var(--font-head); font-size: clamp(2rem,4vw,3rem); font-weight: 800; line-height: 1.1; }
+.cta-sub { color: var(--muted); font-size: 1rem; margin: 1rem auto 2.5rem; max-width: 480px; }
+.cta-btns { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2.5rem 2rem;
+  background: var(--bg);
+}
+.footer-inner {
+  max-width: 1280px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+}
+.footer-logo { display: flex; align-items: center; gap: .5rem; font-family: var(--font-head); font-weight: 700; font-size: .95rem; }
+.footer-logo .dot { color: var(--primary-l); }
+.footer-copy { font-size: .78rem; color: var(--muted); }
+.footer-links { display: flex; gap: 1.5rem; }
+.footer-links a { font-size: .78rem; color: var(--muted); text-decoration: none; transition: color .2s; }
+.footer-links a:hover { color: var(--text); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1100px) {
+  .partners-grid { grid-template-columns: repeat(2, 1fr); }
+  .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 3rem; text-align: center; padding: 3rem 1.5rem; }
+  .hero-desc { margin-left: auto; margin-right: auto; }
+  .hero-btns { justify-content: center; }
+  .hero-stats { justify-content: center; }
+  .hero-dashboard { max-width: 480px; margin: 0 auto; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .section { padding: 4.5rem 0; }
+  .partners-grid { grid-template-columns: 1fr 1fr; }
+  .benefits-grid { grid-template-columns: 1fr; }
+  .ai-inputs { grid-template-columns: 1fr; }
+  .ttn-row { flex-direction: column; }
+  .ttn-meta { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 520px) {
+  .partners-grid { grid-template-columns: 1fr; }
+  .db-row { grid-template-columns: 1fr; }
+  .ttn-meta { grid-template-columns: 1fr; }
+  .hero-stats { gap: 1.5rem; }
+}
+
+/* ── TV / LARGE ── */
+@media (min-width: 1920px) {
+  .container { max-width: 1600px; }
+  .hero-inner { max-width: 1600px; }
+  h1.hero-title { font-size: 5.5rem; }
+  .section-title { font-size: 4rem; }
+  .hstat-num { font-size: 2.25rem; }
+}
+
+/* ── ANIMATIONS ── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .55s ease, transform .55s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-d1 { transition-delay: .1s; }
+.reveal-d2 { transition-delay: .2s; }
+.reveal-d3 { transition-delay: .3s; }
+.reveal-d4 { transition-delay: .4s; }
+
+/* ── SPINNER ── */
+@keyframes spin360 { to { transform: rotate(360deg); } }
+.spin { animation: spin360 .8s linear infinite; }
+</style>
+</head>
+<body>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="pre-ring">
+    <div class="pre-icon"><i class="fas fa-route"></i></div>
+  </div>
+  <div class="pre-logo">Almaty<span>Logix</span></div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:.5rem">
+    <div class="pre-bar-wrap"><div class="pre-bar" id="pre-bar"></div></div>
+    <div class="pre-pct" id="pre-pct">0%</div>
+  </div>
+  <div style="font-family:var(--font-mono);font-size:.65rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase" id="pre-msg">Инициализация ИИ-систем...</div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">
+      <div class="nav-logo-icon"><i class="fas fa-route"></i></div>
+      Almaty<span class="dot">Logix</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#benefits" data-i18n="nav-benefits">Возможности</a></li>
+      <li><a href="#ai" data-i18n="nav-ai">ИИ-оптимизация</a></li>
+      <li><a href="#partners" data-i18n="nav-partners">Партнёры</a></li>
+      <li><a href="#tracking" data-i18n="nav-tracking">Трекинг</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn-pill" onclick="toggleLang()"><i class="fas fa-globe"></i><span id="lang-btn">RU</span></button>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#benefits" onclick="toggleMenu()" data-i18n="nav-benefits">Возможности</a>
+  <a href="#ai" onclick="toggleMenu()" data-i18n="nav-ai">ИИ-оптимизация</a>
+  <a href="#partners" onclick="toggleMenu()" data-i18n="nav-partners">Партнёры</a>
+  <a href="#tracking" onclick="toggleMenu()" data-i18n="nav-tracking">Трекинг</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag"><span class="hero-tag-dot"></span> Smart Logistics · Алматы 2026</div>
+      <h1 class="hero-title" data-i18n="hero-title">Автоматизируем <em>корпоративную</em> логистику</h1>
+      <p class="hero-desc" data-i18n="hero-desc">
+        AlmatyLogix — технологический оператор грузовых потоков Алматы. Корпоративная база данных, ИИ-диспетчер и мониторинг в реальном времени в одной экосистеме.
+      </p>
+      <div class="hero-btns">
+        <a href="#tracking" class="btn-primary" data-i18n="btn-track"><i class="fas fa-search"></i> Отследить груз</a>
+        <a href="#ai" class="btn-ghost" data-i18n="btn-ai"><i class="fas fa-brain"></i> ИИ-маршрут</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat">
+          <div class="hstat-num"><span id="s-orders">2<span class="accent">,</span>847</span></div>
+          <div class="hstat-label" data-i18n="stat-orders">Заказов / сут.</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-num"><span id="s-couriers">184</span></div>
+          <div class="hstat-label" data-i18n="stat-couriers">Курьеров онлайн</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-num">99<span class="accent">%</span></div>
+          <div class="hstat-label" data-i18n="stat-sla">SLA выполнение</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MINI DASHBOARD -->
+    <div class="hero-dashboard">
+      <div class="dash-header">
+        <div class="dash-title">AlmatyLogix · Corp DB</div>
+        <div class="dash-live"><span class="live-dot"></span> Live</div>
+      </div>
+      <div class="dash-body">
+        <div class="db-row">
+          <div class="db-metric">
+            <div class="db-metric-label">Груз в пути</div>
+            <div class="db-metric-val blue" id="dash-transit">214</div>
+          </div>
+          <div class="db-metric">
+            <div class="db-metric-label">Доставлено</div>
+            <div class="db-metric-val green" id="dash-done">1 893</div>
+          </div>
+          <div class="db-metric">
+            <div class="db-metric-label">Склады</div>
+            <div class="db-metric-val amber">7</div>
+          </div>
+          <div class="db-metric">
+            <div class="db-metric-label">Клиентов</div>
+            <div class="db-metric-val" id="dash-clients">342</div>
+          </div>
+        </div>
+        <div class="db-activity" id="feed"></div>
+      </div>
+      <div class="mini-chart">
+        <div class="mini-chart-label">Активность БД · последние 8 ч.</div>
+        <div class="bars" id="mini-bars"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="section" id="benefits">
+  <div class="container">
+    <div class="reveal">
+      <div class="badge" data-i18n="badge-benefits">Для вашего бизнеса</div>
+      <h2 class="section-title" style="margin-top:1rem" data-i18n="benefits-title">Что даёт внедрение<br>корпоративной БД</h2>
+      <p class="section-sub" data-i18n="benefits-sub">Автоматизация всех логистических процессов — от склада до последней мили — на единой платформе.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card reveal reveal-d1">
+        <div class="benefit-icon"><i class="fas fa-database"></i></div>
+        <div class="benefit-title" data-i18n="b1-title">Единая база данных</div>
+        <div class="benefit-text" data-i18n="b1-text">Все заказы, склады, курьеры и клиенты в одной реляционной БД. Мгновенный доступ, история операций, резервное копирование.</div>
+      </div>
+      <div class="benefit-card reveal reveal-d2">
+        <div class="benefit-icon"><i class="fas fa-brain"></i></div>
+        <div class="benefit-title" data-i18n="b2-title">ИИ-диспетчер</div>
+        <div class="benefit-text" data-i18n="b2-text">Нейросеть оптимизирует маршруты в реальном времени, учитывая пробки в Алматы, погоду и загруженность складов.</div>
+      </div>
+      <div class="benefit-card reveal reveal-d3">
+        <div class="benefit-icon"><i class="fas fa-chart-line"></i></div>
+        <div class="benefit-title" data-i18n="b3-title">Аналитика в реальном времени</div>
+        <div class="benefit-text" data-i18n="b3-text">Дашборды с KPI, прогнозы спроса и автоматические отчёты для руководства. SQL-запросы к корпоративной БД без IT-специалистов.</div>
+      </div>
+      <div class="benefit-card reveal reveal-d1">
+        <div class="benefit-icon"><i class="fas fa-shield-alt"></i></div>
+        <div class="benefit-title" data-i18n="b4-title">Безопасность данных</div>
+        <div class="benefit-text" data-i18n="b4-text">Ролевое разграничение доступа, шифрование транзакций и полный аудит-лог операций в соответствии с требованиями РК.</div>
+      </div>
+      <div class="benefit-card reveal reveal-d2">
+        <div class="benefit-icon"><i class="fas fa-plug"></i></div>
+        <div class="benefit-title" data-i18n="b5-title">API-интеграция</div>
+        <div class="benefit-text" data-i18n="b5-text">REST API для подключения вашей учётной системы, 1С или маркетплейса. Синхронизация с корпоративной БД в два клика.</div>
+      </div>
+      <div class="benefit-card reveal reveal-d3">
+        <div class="benefit-icon"><i class="fas fa-mobile-alt"></i></div>
+        <div class="benefit-title" data-i18n="b6-title">Мобильное приложение</div>
+        <div class="benefit-text" data-i18n="b6-text">Курьер видит маршрут, клиент — позицию груза. Все обновления статусов мгновенно пишутся в БД и видны в личном кабинете.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI SECTION -->
+<section class="section" id="ai">
+  <div class="ai-glow"></div>
+  <div class="container">
+    <div class="reveal" style="text-align:center">
+      <div class="badge" data-i18n="badge-ai">Powered by AI</div>
+      <h2 class="section-title" style="margin-top:1rem" data-i18n="ai-section-title">ИИ-оптимизация маршрутов</h2>
+      <p class="section-sub" style="margin:1rem auto 0" data-i18n="ai-section-sub">Нейросеть LogiTech AI анализирует данные из корпоративной БД, Яндекс.Карт и метеосервисов для нахождения оптимального пути.</p>
+    </div>
+    <div class="ai-card reveal">
+      <div class="ai-card-header">
+        <div class="ai-title-wrap">
+          <div class="ai-icon"><i class="fas fa-brain"></i></div>
+          <div>
+            <div class="ai-name">LogiTech AI</div>
+            <div class="ai-version">v3.1 · Neural Routing Engine</div>
+          </div>
+        </div>
+        <div class="ai-badge-live"><span class="live-dot"></span> Система онлайн</div>
+      </div>
+      <div class="ai-card-body">
+        <p class="ai-desc" data-i18n="ai-desc">Введите пункт отправления и назначения. ИИ-диспетчер запросит актуальные данные из корпоративной БД: загрузку складов, доступность транспорта и текущую обстановку на дорогах Алматы.</p>
+        <div class="ai-inputs">
+          <div class="ai-input-wrap">
+            <label data-i18n="ai-from">Откуда</label>
+            <i class="fas fa-map-marker-alt ai-input-icon"></i>
+            <input type="text" id="aiFrom" class="ai-input" placeholder="Напр. Апорт, Достык Плаза...">
+          </div>
+          <div class="ai-input-wrap">
+            <label data-i18n="ai-to">Куда</label>
+            <i class="fas fa-flag-checkered ai-input-icon"></i>
+            <input type="text" id="aiTo" class="ai-input" placeholder="Напр. Медеу, аэропорт...">
+          </div>
+        </div>
+        <button class="btn-ai" id="ai-btn" onclick="runAI()">
+          <i class="fas fa-bolt"></i>
+          <span data-i18n="ai-run">Запустить оптимизацию</span>
+        </button>
+        <div class="ai-result" id="ai-result">
+          <div class="ai-result-header"><i class="fas fa-terminal"></i> LogiTech AI · Результат</div>
+          <div class="ai-result-body" id="ai-result-text"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section class="section" id="partners">
+  <div class="container">
+    <div class="reveal" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1.5rem">
+      <div>
+        <div class="badge-green badge" style="margin-bottom:1rem">
+          <span class="live-dot"></span>
+          <span data-i18n="badge-partners">Live · БД синхронизирована</span>
+        </div>
+        <h2 class="section-title" data-i18n="partners-title">Партнёрская сеть</h2>
+        <div class="divider"></div>
+      </div>
+      <div style="font-family:var(--font-mono);font-size:.72rem;color:var(--muted);" data-i18n="partners-sub">Данные обновляются каждые 5 сек</div>
+    </div>
+    <div class="partners-grid">
+
+      <div class="partner-card reveal reveal-d1">
+        <div style="display:flex;align-items:center;gap:.875rem">
+          <div class="p-logo-wrap" style="background:rgba(234,88,12,.12)">
+            <i class="fas fa-hamburger" style="color:#ea580c;font-size:1.2rem"></i>
+          </div>
+          <div>
+            <div class="p-name">Doner na Satpayeva</div>
+            <div class="p-cat" data-i18n="p1-cat">Доставка готовых блюд</div>
+          </div>
+        </div>
+        <div class="p-divider"></div>
+        <div class="p-stats">
+          <div class="p-stat-row">
+            <span class="p-stat-label" data-i18n="stat-orders-lbl">Заказов сегодня</span>
+            <span class="p-stat-val" style="color:#ea580c" id="p-doner-orders">342</span>
+          </div>
+          <div class="p-bar"><div class="p-bar-fill" style="background:#ea580c;width:85%"></div></div>
+          <div class="p-stat-row">
+            <span class="p-stat-label" data-i18n="stat-zone">Зона доставки</span>
+            <span class="p-stat-val">Бостандык, Медеу</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="partner-card reveal reveal-d2">
+        <div style="display:flex;align-items:center;gap:.875rem">
+          <div class="p-logo-wrap" style="background:rgba(219,39,119,.1)">
+            <i class="fas fa-shopping-bag" style="color:#db2777;font-size:1.2rem"></i>
+          </div>
+          <div>
+            <div class="p-name">Mon Amie</div>
+            <div class="p-cat" data-i18n="p2-cat">Парфюмерия и косметика</div>
+          </div>
+        </div>
+        <div class="p-divider"></div>
+        <div class="p-stats">
+          <div class="p-stat-row">
+            <span class="p-stat-label" data-i18n="stat-couriers-lbl">Курьеров онлайн</span>
+            <span class="p-stat-val" style="color:#db2777" id="p-mon-couriers">56</span>
+          </div>
+          <div class="p-bar"><div class="p-bar-fill" style="background:#db2777;width:62%"></div></div>
+          <div class="p-stat-row">
+            <span class="p-stat-label" data-i18n="stat-zone">Зона доставки</span>
+            <span class="p-stat-val">Алмалы, Ауэзов</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="partner-card reveal reveal-d3">
+        <div style="display:flex;align-items:center;gap:.875rem">
+          <div class="p-logo-wrap" style="background:rgba(6,182,212,.1)">
+            <i class="fas fa-fish" style="color:#06b6d4;font-size:1.2rem"></i>
+          </div>
+          <div>
+            <div class="p-name">Okadzaki</div>
+            <div class="p-cat" data-i18n="p3-cat">Морепродукты · Cold Chain</div>
+          </div>
+        </div>
+        <div class="p-divider"></div>
+        <div class="p-stats">
+          <div class="p-stat-row">
+            <span class="p-stat-label" data-i18n="stat-temp">Температура</span>
+            <span class="p-stat-val" style="color:#06b6d4" id="p-temp">-18.4°C</span>
+          </div>
+          <div class="p-bar"><div class="p-bar-fill" style="background:#06b6d4;width:95%"></div></div>
+          <div class="p-stat-row">
+            <span class="p-stat-label" data-i18n="stat-sla-lbl">SLA выполнение</span>
+            <span class="p-stat-val" style="color:var(--green)">99.2%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="partner-card vip reveal reveal-d4">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div style="display:flex;align-items:center;gap:.875rem">
+            <div class="p-logo-wrap" style="background:rgba(245,158,11,.12)">
+              <i class="fas fa-star" style="color:var(--gold);font-size:1.2rem"></i>
+            </div>
+            <div>
+              <div class="p-name">Radmir Company</div>
+              <div class="p-cat" style="color:rgba(245,158,11,.6)" data-i18n="p4-cat">Премиум-дистрибуция</div>
+            </div>
+          </div>
+          <div class="vip-badge"><i class="fas fa-crown"></i> VIP GOLD</div>
+        </div>
+        <div class="p-divider" style="background:rgba(245,158,11,.1)"></div>
+        <div class="p-stats">
+          <div class="p-stat-row">
+            <span class="p-stat-label" style="color:rgba(245,158,11,.5)" data-i18n="stat-orders-lbl">Заказов сегодня</span>
+            <span class="p-stat-val" style="color:var(--gold)" id="p-radmir">89</span>
+          </div>
+          <div class="p-bar" style="background:rgba(245,158,11,.08)"><div class="p-bar-fill" style="background:var(--gold);width:75%"></div></div>
+          <div class="p-stat-row">
+            <span class="p-stat-label" style="color:rgba(245,158,11,.5)" data-i18n="stat-partner">Статус партнёра</span>
+            <span class="p-stat-val" style="color:var(--gold)">Приоритетный</span>
+          </div>
+        </div>
+        <button class="btn-primary" style="margin-top:.25rem;width:100%;justify-content:center;font-size:.8rem;padding:.7rem" onclick="requestCall('Radmir Company')" data-i18n="btn-contact">
+          <i class="fas fa-phone"></i> Связаться
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TRACKING -->
+<section class="section" id="tracking">
+  <div class="container">
+    <div class="reveal" style="text-align:center">
+      <div class="badge" data-i18n="badge-db">Корпоративная база данных</div>
+      <h2 class="section-title" style="margin-top:1rem" data-i18n="tracking-title">Трекинг груза</h2>
+      <p class="section-sub" style="margin:1rem auto 0" data-i18n="tracking-sub">Введите номер ТТН для запроса к корпоративной БД. Система вернёт актуальный статус, маршрут и метаданные.</p>
+    </div>
+    <div class="tracking-wrap reveal">
+      <div class="tracking-header">
+        <div style="display:flex;align-items:center;gap:.75rem">
+          <div style="width:40px;height:40px;background:rgba(37,99,235,.12);border-radius:.75rem;display:flex;align-items:center;justify-content:center;color:var(--primary-l)"><i class="fas fa-database"></i></div>
+          <div>
+            <div class="tracking-title" data-i18n="db-title">Интеграция с корпоративной БД</div>
+            <div class="tracking-sub" data-i18n="db-sub">Запрос выполняется напрямую к таблице shipments</div>
+          </div>
+        </div>
+      </div>
+      <div class="tracking-body">
+        <div class="ttn-row">
+          <div class="ttn-input-wrap">
+            <i class="fas fa-barcode ttn-input-icon"></i>
+            <input type="text" id="ttn-input" class="ttn-input" placeholder="Номер ТТН — напр. TTN-2026">
+          </div>
+          <button class="btn-check" onclick="checkStatus()" data-i18n="btn-check">Проверить</button>
+        </div>
+        <div class="ttn-hint">
+          <span data-i18n="ttn-hint-try">Попробуйте:</span>
+          <code>TTN-2026</code>, <code>RADMIR-01</code>, <code>DONER-77</code>, <code>MON-AMIE</code>, <code>OKAZ-55</code>
+        </div>
+
+        <div class="ttn-result" id="ttn-result">
+          <div class="ttn-result-inner">
+            <div class="ttn-result-status">
+              <div class="status-icon" id="status-icon"><i class="fas fa-truck"></i></div>
+              <div>
+                <div class="status-label" data-i18n="status-lbl">Статус из базы данных</div>
+                <div class="status-text" id="status-text">—</div>
+              </div>
+            </div>
+            <div class="ttn-meta" id="ttn-meta"></div>
+          </div>
+        </div>
+
+        <div class="db-table-wrap">
+          <div class="db-table-label" data-i18n="db-table-lbl">Последние записи · таблица shipments</div>
+          <table class="db-table">
+            <thead>
+              <tr>
+                <th data-i18n="col-ttn">ТТН</th>
+                <th data-i18n="col-route">Маршрут</th>
+                <th data-i18n="col-status">Статус</th>
+                <th data-i18n="col-updated">Обновлено</th>
+              </tr>
+            </thead>
+            <tbody id="db-tbody">
+              <tr><td>TTN-2026</td><td>Алматы → Астана</td><td><span class="db-pill transit">В пути</span></td><td>10:42</td></tr>
+              <tr><td>RADMIR-01</td><td>Склад №3 → Radmir Co.</td><td><span class="db-pill arrived">На складе</span></td><td>09:17</td></tr>
+              <tr><td>DONER-77</td><td>Кухня → Сатпаева 29</td><td><span class="db-pill delivered">Доставлено</span></td><td>08:55</td></tr>
+              <tr><td>MON-AMIE</td><td>Склад №4 — ожидание</td><td><span class="db-pill waiting">Ожидание</span></td><td>08:30</td></tr>
+              <tr><td>OKAZ-55</td><td>Рефрижератор → Okadzaki</td><td><span class="db-pill transit">В пути</span></td><td>11:05</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" id="cta">
+  <div class="container">
+    <div class="cta-wrap reveal">
+      <div class="badge" style="margin-bottom:1.5rem" data-i18n="badge-cta">Начните сегодня</div>
+      <h2 class="cta-title" data-i18n="cta-title">Готовы автоматизировать вашу логистику?</h2>
+      <p class="cta-sub" data-i18n="cta-sub">Свяжитесь с нами — и наши эксперты за 24 часа подготовят индивидуальное предложение по внедрению корпоративной БД.</p>
+      <div class="cta-btns">
+        <button class="btn-primary" onclick="alert(i18n('cta-msg'))">
+          <i class="fas fa-calendar-alt"></i>
+          <span data-i18n="btn-demo">Получить демо</span>
+        </button>
+        <a href="#tracking" class="btn-ghost">
+          <i class="fas fa-search"></i>
+          <span data-i18n="btn-try">Попробовать трекинг</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo"><i class="fas fa-route" style="color:var(--primary-l)"></i> Almaty<span class="dot">Logix</span></div>
+    <div class="footer-copy" data-i18n="footer-copy">© 2026 AlmatyLogix. Разработано для дипломного проекта.</div>
+    <div class="footer-links">
+      <a href="#benefits" data-i18n="nav-benefits">Возможности</a>
+      <a href="#partners" data-i18n="nav-partners">Партнёры</a>
+      <a href="#tracking" data-i18n="nav-tracking">Трекинг</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════
+   i18n
+══════════════════════════════════════════ */
+const langs = ['ru','en','kk'];
+let lang = 'ru';
+
+const t = {
+  ru: {
+    'nav-benefits':'Возможности','nav-ai':'ИИ-оптимизация','nav-partners':'Партнёры','nav-tracking':'Трекинг',
+    'hero-title':'Автоматизируем <em>корпоративную</em> логистику',
+    'hero-desc':'AlmatyLogix — технологический оператор грузовых потоков Алматы. Корпоративная база данных, ИИ-диспетчер и мониторинг в реальном времени в одной экосистеме.',
+    'btn-track':'<i class="fas fa-search"></i> Отследить груз',
+    'btn-ai':'<i class="fas fa-brain"></i> ИИ-маршрут',
+    'stat-orders':'Заказов / сут.','stat-couriers':'Курьеров онлайн','stat-sla':'SLA выполнение',
+    'badge-benefits':'Для вашего бизнеса',
+    'benefits-title':'Что даёт внедрение<br>корпоративной БД',
+    'benefits-sub':'Автоматизация всех логистических процессов — от склада до последней мили — на единой платформе.',
+    'b1-title':'Единая база данных','b1-text':'Все заказы, склады, курьеры и клиенты в одной реляционной БД. Мгновенный доступ, история операций, резервное копирование.',
+    'b2-title':'ИИ-диспетчер','b2-text':'Нейросеть оптимизирует маршруты в реальном времени, учитывая пробки в Алматы, погоду и загруженность складов.',
+    'b3-title':'Аналитика в реальном времени','b3-text':'Дашборды с KPI, прогнозы спроса и автоматические отчёты для руководства. SQL-запросы к корпоративной БД без IT-специалистов.',
+    'b4-title':'Безопасность данных','b4-text':'Ролевое разграничение доступа, шифрование транзакций и полный аудит-лог операций в соответствии с требованиями РК.',
+    'b5-title':'API-интеграция','b5-text':'REST API для подключения вашей учётной системы, 1С или маркетплейса. Синхронизация с корпоративной БД в два клика.',
+    'b6-title':'Мобильное приложение','b6-text':'Курьер видит маршрут, клиент — позицию груза. Все обновления статусов мгновенно пишутся в БД и видны в личном кабинете.',
+    'badge-ai':'Powered by AI','ai-section-title':'ИИ-оптимизация маршрутов',
+    'ai-section-sub':'Нейросеть LogiTech AI анализирует данные из корпоративной БД, Яндекс.Карт и метеосервисов для нахождения оптимального пути.',
+    'ai-desc':'Введите пункт отправления и назначения. ИИ-диспетчер запросит актуальные данные из корпоративной БД: загрузку складов, доступность транспорта и текущую обстановку на дорогах Алматы.',
+    'ai-from':'Откуда','ai-to':'Куда','ai-run':'Запустить оптимизацию',
+    'badge-partners':'Live · БД синхронизирована','partners-title':'Партнёрская сеть','partners-sub':'Данные обновляются каждые 5 сек',
+    'p1-cat':'Доставка готовых блюд','p2-cat':'Парфюмерия и косметика','p3-cat':'Морепродукты · Cold Chain','p4-cat':'Премиум-дистрибуция',
+    'stat-orders-lbl':'Заказов сегодня','stat-couriers-lbl':'Курьеров онлайн','stat-temp':'Температура','stat-sla-lbl':'SLA выполнение','stat-zone':'Зона доставки','stat-partner':'Статус партнёра',
+    'btn-contact':'<i class="fas fa-phone"></i> Связаться',
+    'badge-db':'Корпоративная база данных','tracking-title':'Трекинг груза',
+    'tracking-sub':'Введите номер ТТН для запроса к корпоративной БД. Система вернёт актуальный статус, маршрут и метаданные.',
+    'db-title':'Интеграция с корпоративной БД','db-sub':'Запрос выполняется напрямую к таблице shipments',
+    'btn-check':'Проверить','ttn-hint-try':'Попробуйте:','status-lbl':'Статус из базы данных',
+    'db-table-lbl':'Последние записи · таблица shipments',
+    'col-ttn':'ТТН','col-route':'Маршрут','col-status':'Статус','col-updated':'Обновлено',
+    'badge-cta':'Начните сегодня','cta-title':'Готовы автоматизировать вашу логистику?',
+    'cta-sub':'Свяжитесь с нами — и наши эксперты за 24 часа подготовят индивидуальное предложение по внедрению корпоративной БД.',
+    'cta-msg':'Спасибо! Мы свяжемся с вами в течение 24 часов.',
+    'btn-demo':'Получить демо','btn-try':'Попробовать трекинг',
+    'footer-copy':'© 2026 AlmatyLogix. Разработано для дипломного проекта.',
+    'ai-loading':'Запрос к нейронной сети...',
+    'ai-not-found':'Введите оба пункта назначения!',
+    'ttn-not-found':'Запись не найдена в базе данных.',
+    'ttn-loading':'Запрос к базе данных...',
+  },
+  en: {
+    'nav-benefits':'Features','nav-ai':'AI Routing','nav-partners':'Partners','nav-tracking':'Tracking',
+    'hero-title':'Automating <em>corporate</em> logistics',
+    'hero-desc':'AlmatyLogix is the technology freight operator of Almaty. Corporate database, AI dispatcher and real-time monitoring in one ecosystem.',
+    'btn-track':'<i class="fas fa-search"></i> Track Cargo',
+    'btn-ai':'<i class="fas fa-brain"></i> AI Route',
+    'stat-orders':'Orders / day','stat-couriers':'Couriers online','stat-sla':'SLA fulfillment',
+    'badge-benefits':'For your business',
+    'benefits-title':'What a corporate DB<br>delivers for you',
+    'benefits-sub':'Automate all logistics processes — from warehouse to last mile — on a single platform.',
+    'b1-title':'Unified Database','b1-text':'All orders, warehouses, couriers, and clients in one relational DB. Instant access, operation history, backups.',
+    'b2-title':'AI Dispatcher','b2-text':'The neural network optimizes routes in real time, accounting for Almaty traffic, weather, and warehouse loads.',
+    'b3-title':'Real-time Analytics','b3-text':'KPI dashboards, demand forecasts, and automated reports for management. SQL queries to the corporate DB without IT specialists.',
+    'b4-title':'Data Security','b4-text':'Role-based access control, transaction encryption, and a full audit log in compliance with RK requirements.',
+    'b5-title':'API Integration','b5-text':'REST API for connecting your accounting system, 1C, or marketplace. Sync with the corporate DB in two clicks.',
+    'b6-title':'Mobile Application','b6-text':'Couriers see routes; clients see cargo position. All status updates are instantly written to the DB and visible in the dashboard.',
+    'badge-ai':'Powered by AI','ai-section-title':'AI Route Optimization',
+    'ai-section-sub':'LogiTech AI analyses data from the corporate DB, maps, and weather services to find the optimal route.',
+    'ai-desc':'Enter origin and destination. The AI dispatcher will query the corporate DB: warehouse loads, transport availability, and current Almaty road conditions.',
+    'ai-from':'From','ai-to':'To','ai-run':'Run Optimization',
+    'badge-partners':'Live · DB synced','partners-title':'Partner Network','partners-sub':'Data refreshed every 5 sec',
+    'p1-cat':'Food Delivery','p2-cat':'Perfumery & Cosmetics','p3-cat':'Seafood · Cold Chain','p4-cat':'Premium Distribution',
+    'stat-orders-lbl':'Orders today','stat-couriers-lbl':'Couriers online','stat-temp':'Temperature','stat-sla-lbl':'SLA fulfillment','stat-zone':'Delivery zone','stat-partner':'Partner status',
+    'btn-contact':'<i class="fas fa-phone"></i> Contact',
+    'badge-db':'Corporate Database','tracking-title':'Cargo Tracking',
+    'tracking-sub':'Enter the TTN number to query the corporate DB. The system returns the current status, route, and metadata.',
+    'db-title':'Corporate DB Integration','db-sub':'Query runs directly against the shipments table',
+    'btn-check':'Check','ttn-hint-try':'Try:','status-lbl':'Status from database',
+    'db-table-lbl':'Recent records · shipments table',
+    'col-ttn':'TTN','col-route':'Route','col-status':'Status','col-updated':'Updated',
+    'badge-cta':'Get started','cta-title':'Ready to automate your logistics?',
+    'cta-sub':'Contact us — our experts will prepare a tailored corporate DB implementation offer within 24 hours.',
+    'cta-msg':'Thank you! We will contact you within 24 hours.',
+    'btn-demo':'Get Demo','btn-try':'Try Tracking',
+    'footer-copy':'© 2026 AlmatyLogix. Developed for a thesis project.',
+    'ai-loading':'Querying the neural network...','ai-not-found':'Please enter both locations!',
+    'ttn-not-found':'Record not found in the database.','ttn-loading':'Querying database...',
+  },
+  kk: {
+    'nav-benefits':'Мүмкіндіктер','nav-ai':'ЖИ-бағдарлау','nav-partners':'Серіктестер','nav-tracking':'Трекинг',
+    'hero-title':'<em>Корпоративтік</em> логистиканы автоматтандырамыз',
+    'hero-desc':'AlmatyLogix — Алматының жүк ағындарының технологиялық операторы. Корпоративтік деректер қоры, ЖИ-диспетчер және нақты уақыттағы мониторинг.',
+    'btn-track':'<i class="fas fa-search"></i> Жүкті қадағалау',
+    'btn-ai':'<i class="fas fa-brain"></i> ЖИ-маршрут',
+    'stat-orders':'Тапсырыс / тәулік','stat-couriers':'Курьерлер онлайн','stat-sla':'SLA орындалуы',
+    'badge-benefits':'Сіздің бизнесіңіз үшін',
+    'benefits-title':'Корпоративтік ДҚ не<br>береді',
+    'benefits-sub':'Барлық логистикалық процестерді автоматтандыру — қоймадан соңғы милге дейін.',
+    'b1-title':'Бірыңғай деректер қоры','b1-text':'Барлық тапсырыстар, қоймалар, курьерлер мен клиенттер бір реляциялық ДҚ-да.',
+    'b2-title':'ЖИ-диспетчер','b2-text':'Нейрожелі Алматы жолдарын, ауа райы мен қойма жүктемесін ескере отырып маршруттарды оңтайландырады.',
+    'b3-title':'Нақты уақыттағы аналитика','b3-text':'KPI бақылау тақтасы, сұраныс болжамы және басшылыққа автоматты есептер.',
+    'b4-title':'Деректер қауіпсіздігі','b4-text':'Рөлге негізделген қол жеткізу, транзакцияларды шифрлау және толық аудит журналы.',
+    'b5-title':'API интеграция','b5-text':'1С немесе маркетплейсіңізді REST API арқылы қосыңыз. Екі рет басу арқылы синхрондау.',
+    'b6-title':'Мобильді қосымша','b6-text':'Курьер маршрутты, клиент жүктің орнын көреді. Барлық жаңартулар дереу ДҚ-ға жазылады.',
+    'badge-ai':'ЖИ-технология','ai-section-title':'Маршруттарды ЖИ-оңтайландыру',
+    'ai-section-sub':'LogiTech AI корпоративтік ДҚ деректерін, картографиялық және метео-қызметтерді талдайды.',
+    'ai-desc':'Жіберу және тағайындалу пунктін енгізіңіз. ЖИ-диспетчер ДҚ-дан қойма жүктемесін, транспорт қолжетімділігін және Алматы жолдарының жағдайын сұрайды.',
+    'ai-from':'Қайдан','ai-to':'Қайда','ai-run':'Оңтайландыруды іске қосу',
+    'badge-partners':'Live · ДҚ синхрондалды','partners-title':'Серіктестік желі','partners-sub':'Деректер 5 сек сайын жаңартылады',
+    'p1-cat':'Дайын тағам жеткізу','p2-cat':'Парфюмерия және косметика','p3-cat':'Теңіз өнімдері · Cold Chain','p4-cat':'Премиум-дистрибуция',
+    'stat-orders-lbl':'Бүгінгі тапсырыстар','stat-couriers-lbl':'Курьерлер онлайн','stat-temp':'Температура','stat-sla-lbl':'SLA орындалуы','stat-zone':'Жеткізу аймағы','stat-partner':'Серіктес мәртебесі',
+    'btn-contact':'<i class="fas fa-phone"></i> Байланысу',
+    'badge-db':'Корпоративтік деректер қоры','tracking-title':'Жүкті трекинг',
+    'tracking-sub':'ТТН нөмірін енгізіп, корпоративтік ДҚ-дан деректер алыңыз.',
+    'db-title':'Корпоративтік ДҚ интеграциясы','db-sub':'Сұраныс тікелей shipments кестесіне жіберіледі',
+    'btn-check':'Тексеру','ttn-hint-try':'Қолданып көріңіз:','status-lbl':'Деректер қорының мәртебесі',
+    'db-table-lbl':'Соңғы жазбалар · shipments кестесі',
+    'col-ttn':'ТТН','col-route':'Маршрут','col-status':'Мәртебе','col-updated':'Жаңартылды',
+    'badge-cta':'Бүгін бастаңыз','cta-title':'Логистикаңызды автоматтандыруға дайынсыз ба?',
+    'cta-sub':'Бізге хабарласыңыз — сарапшылар 24 сағат ішінде жеке ұсыныс дайындайды.',
+    'cta-msg':'Рақмет! 24 сағат ішінде хабарласамыз.',
+    'btn-demo':'Демо алу','btn-try':'Трекингті сынау',
+    'footer-copy':'© 2026 AlmatyLogix. Дипломдық жоба үшін әзірленген.',
+    'ai-loading':'Нейрожелі сұранысы...','ai-not-found':'Екі пунктті де енгізіңіз!',
+    'ttn-not-found':'Деректер қорында жазба табылмады.','ttn-loading':'Деректер қорына сұраныс...',
+  }
+};
+
+function i18n(key) { return (t[lang] && t[lang][key]) || (t['ru'][key]) || key; }
+
+function applyLang() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    const val = i18n(k);
+    if (val) el.innerHTML = val;
+  });
+}
+
+function toggleLang() {
+  lang = langs[(langs.indexOf(lang)+1) % langs.length];
+  document.getElementById('lang-btn').textContent = lang.toUpperCase();
+  applyLang();
+}
+
+/* ══════════════════════════════════════════
+   PRELOADER
+══════════════════════════════════════════ */
+const messages = ['Инициализация ИИ-систем...','Подключение к БД...','Загрузка маршрутов...','Синхронизация...'];
+let pct = 0, mIdx = 0;
+const preBar = document.getElementById('pre-bar');
+const prePct = document.getElementById('pre-pct');
+const preMsg = document.getElementById('pre-msg');
+
+const pInterval = setInterval(() => {
+  pct += Math.floor(Math.random()*12)+4;
+  if (pct > 100) pct = 100;
+  preBar.style.width = pct + '%';
+  prePct.textContent = pct + '%';
+  mIdx = Math.floor((pct/100)*messages.length);
+  if (mIdx >= messages.length) mIdx = messages.length-1;
+  preMsg.textContent = messages[mIdx];
+  if (pct >= 100) {
+    clearInterval(pInterval);
+    setTimeout(() => document.getElementById('preloader').classList.add('hide'), 400);
+  }
+}, 130);
+
+/* ══════════════════════════════════════════
+   MINI DASHBOARD
+══════════════════════════════════════════ */
+const activities = [
+  { color:'#3b82f6', text:'TTN-2026 → В пути: Алматы — Астана', time: null },
+  { color:'#10b981', text:'DONER-77 → Доставлено: Сатпаева 29', time: null },
+  { color:'#f59e0b', text:'RADMIR-01 → Прибыло на склад №3', time: null },
+  { color:'#06b6d4', text:'OKAZ-55 → Температурный мониторинг OK', time: null },
+  { color:'#8b5cf6', text:'MON-AMIE → Ожидание погрузки', time: null },
+];
+
+function timeNow() {
+  const d = new Date(); return d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0');
+}
+function renderFeed() {
+  const feed = document.getElementById('feed');
+  feed.innerHTML = activities.slice(0,3).map((a,i) => `
+    <div class="db-activity-row" style="animation-delay:${i*0.1}s">
+      <div class="db-activity-dot" style="background:${a.color}"></div>
+      <div class="db-activity-text">${a.text}</div>
+      <div class="db-activity-time">${timeNow()}</div>
+    </div>`).join('');
+}
+renderFeed();
+setInterval(() => { activities.unshift(activities.pop()); renderFeed(); }, 4000);
+
+function renderBars() {
+  const bars = document.getElementById('mini-bars');
+  const vals = Array.from({length:8}, () => Math.floor(Math.random()*80)+20);
+  bars.innerHTML = vals.map((v,i) => `
+    <div class="bar-item" style="background:${i===7?'var(--primary-l)':'rgba(59,130,246,.3)'};height:${v}%"></div>`
+  ).join('');
+}
+renderBars();
+setInterval(renderBars, 3500);
+
+/* live counters */
+setInterval(() => {
+  const t = document.getElementById('dash-transit');
+  const d = document.getElementById('dash-done');
+  const c = document.getElementById('dash-clients');
+  if(t) t.textContent = parseInt(t.textContent) + (Math.random()>.6?1:0);
+  if(d) d.textContent = (parseInt(d.textContent.replace(',',''))+Math.floor(Math.random()*2)).toLocaleString();
+  if(c) c.textContent = parseInt(c.textContent) + (Math.random()>.7?1:0);
+  const po = document.getElementById('p-doner-orders');
+  if(po) po.textContent = parseInt(po.textContent) + Math.floor(Math.random()*2);
+  const pm = document.getElementById('p-mon-couriers');
+  if(pm) pm.textContent = Math.max(40, parseInt(pm.textContent) + (Math.random()>.5?1:-1));
+  const pr = document.getElementById('p-radmir');
+  if(pr) pr.textContent = parseInt(pr.textContent) + (Math.random()>.6?1:0);
+}, 3000);
+
+/* ══════════════════════════════════════════
+   AI
+══════════════════════════════════════════ */
+const almaty = ['Апорт', 'Медеу', 'ВОАД', 'Алматы 1 (ЖД)', 'Аэропорт', 'Бостандык', 'Достык Плаза', 'Садовый', 'Алатау', 'Наурызбай'];
+const roads = ['Аль-Фараби', 'Сейфуллина', 'Абая', 'Розыбакиева', 'Достык'];
+
+function runAI() {
+  const from = document.getElementById('aiFrom').value.trim();
+  const to   = document.getElementById('aiTo').value.trim();
+  const btn  = document.getElementById('ai-btn');
+  const res  = document.getElementById('ai-result');
+  const txt  = document.getElementById('ai-result-text');
+
+  if (!from || !to) { alert(i18n('ai-not-found')); return; }
+
+  btn.disabled = true;
+  btn.innerHTML = `<i class="fas fa-spinner spin"></i> <span>${i18n('ai-loading')}</span>`;
+  res.classList.add('show');
+  txt.innerHTML = '<span style="color:var(--muted)">...</span>';
+
+  const time     = Math.floor(Math.random()*(55-18)+18);
+  const alt      = Math.floor(Math.random()*(time+20-time+5)+time+5);
+  const road     = roads[Math.floor(Math.random()*roads.length)];
+  const road2    = roads[Math.floor(Math.random()*roads.length)];
+  const dist     = Math.floor(Math.random()*20+5);
+  const vehicle  = ['Газель', 'Renault Master', 'Ford Transit'][Math.floor(Math.random()*3)];
+  const driver   = ['Асан К.', 'Бейбут М.', 'Данияр С.', 'Нурлан А.'][Math.floor(Math.random()*4)];
+  const co2      = (dist * 0.21).toFixed(1);
+
+  setTimeout(() => {
+    txt.innerHTML = `
+<strong>► Маршрут:</strong> ${from} → ${road} → ${to}<br>
+<strong>► Время:</strong> ${time} мин · Расстояние: ~${dist} км<br>
+<strong>► Транспорт:</strong> ${vehicle} · Водитель: ${driver}<br>
+<strong>► CO₂:</strong> ${co2} кг · Альтернатива: ${alt} мин (${road2})<br>
+<strong>► БД:</strong> Запись создана · ID: SHP-${Date.now().toString().slice(-6)}`;
+    btn.disabled = false;
+    btn.innerHTML = `<i class="fas fa-bolt"></i> <span data-i18n="ai-run">${i18n('ai-run')}</span>`;
+  }, 2200);
+}
+
+/* ══════════════════════════════════════════
+   TRACKING / DB
+══════════════════════════════════════════ */
+const db = {
+  'TTN-2026':  { text:'Груз в пути: Алматы → Астана', icon:'fa-truck', type:'transit', weight:'3.2 т', vehicle:'Gazelle', eta:'16:30' },
+  'RADMIR-01': { text:'Прибыло на склад: Radmir Company', icon:'fa-warehouse', type:'arrived', weight:'1.5 т', vehicle:'Ford Transit', eta:'09:17' },
+  'DONER-77':  { text:'Доставлено: Сатпаева 29', icon:'fa-check-circle', type:'delivered', weight:'48 кг', vehicle:'Мотокурьер', eta:'08:55' },
+  'MON-AMIE':  { text:'Ожидание погрузки: Склад №4', icon:'fa-clock', type:'waiting', weight:'220 кг', vehicle:'Renault Master', eta:'14:00' },
+  'OKAZ-55':   { text:'Рефрижератор в пути: Cold Chain OK', icon:'fa-snowflake', type:'transit', weight:'870 кг', vehicle:'Рефрижератор', eta:'13:45' },
+};
+
+function checkStatus() {
+  const inp = document.getElementById('ttn-input').value.trim().toUpperCase();
+  const res = document.getElementById('ttn-result');
+  const st  = document.getElementById('status-text');
+  const si  = document.getElementById('status-icon');
+  const meta= document.getElementById('ttn-meta');
+
+  res.classList.add('show');
+  st.textContent = i18n('ttn-loading');
+  si.innerHTML = '<i class="fas fa-spinner spin"></i>';
+  meta.innerHTML = '';
+
+  setTimeout(() => {
+    const rec = db[inp];
+    if (rec) {
+      st.textContent = rec.text;
+      si.innerHTML = `<i class="fas ${rec.icon}"></i>`;
+      meta.innerHTML = `
+        <div class="ttn-meta-item"><div class="ttn-meta-label">Вес</div><div class="ttn-meta-val">${rec.weight}</div></div>
+        <div class="ttn-meta-item"><div class="ttn-meta-label">Транспорт</div><div class="ttn-meta-val">${rec.vehicle}</div></div>
+        <div class="ttn-meta-item"><div class="ttn-meta-label">ETA / Время</div><div class="ttn-meta-val">${rec.eta}</div></div>`;
+    } else {
+      st.textContent = i18n('ttn-not-found');
+      si.innerHTML = '<i class="fas fa-times-circle" style="color:var(--red-c)"></i>';
+    }
+  }, 900);
+}
+
+document.getElementById('ttn-input').addEventListener('keydown', e => { if(e.key==='Enter') checkStatus(); });
+
+/* ══════════════════════════════════════════
+   MOBILE MENU
+══════════════════════════════════════════ */
+function toggleMenu() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+
+/* ══════════════════════════════════════════
+   PARTNER CONTACT
+══════════════════════════════════════════ */
+function requestCall(name) {
+  alert(`${name}: ${i18n('cta-msg')}`);
+}
+
+/* ══════════════════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════════════════ */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
 </body>
 </html>
