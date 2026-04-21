@@ -40,12 +40,12 @@ body {
   line-height: 1.6;
 }
 
-/* ── SCROLLBAR ── */
+
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 2px; }
 
-/* ── PRELOADER ── */
+
 #preloader {
   position: fixed; inset: 0; z-index: 9999;
   background: var(--bg);
@@ -100,7 +100,7 @@ body {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ── NAV ── */
+
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   height: var(--nav-h);
@@ -178,7 +178,7 @@ nav {
   border-bottom: 1px solid var(--border);
 }
 
-/* ── UTILS ── */
+
 .section { padding: 7rem 0; }
 .container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
 .badge {
@@ -198,7 +198,7 @@ nav {
 }
 .divider { width: 48px; height: 3px; background: var(--primary); border-radius: 9999px; margin-top: 1.25rem; }
 
-/* ── HERO ── */
+
 #hero {
   min-height: 100vh;
   padding-top: var(--nav-h);
@@ -276,7 +276,7 @@ h1.hero-title em { font-style: normal; color: var(--primary-l); }
 .hstat-num .accent { color: var(--primary-l); }
 .hstat-label { font-size: .72rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 
-/* ── DASHBOARD CARD ── */
+
 .hero-dashboard {
   position: relative;
   background: var(--card);
@@ -347,7 +347,7 @@ h1.hero-title em { font-style: normal; color: var(--primary-l); }
 .bars { display: flex; align-items: flex-end; gap: 6px; height: 56px; }
 .bar-item { flex: 1; border-radius: 3px 3px 0 0; transition: height .4s ease; }
 
-/* ── BENEFITS ── */
+
 #benefits { background: var(--surface); }
 .benefits-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 4rem;
@@ -383,7 +383,7 @@ h1.hero-title em { font-style: normal; color: var(--primary-l); }
 }
 .benefit-text { font-size: .875rem; color: var(--muted); line-height: 1.65; }
 
-/* ── AI SECTION ── */
+
 #ai { position: relative; overflow: hidden; }
 .ai-glow {
   position: absolute; width: 600px; height: 600px;
@@ -463,7 +463,7 @@ h1.hero-title em { font-style: normal; color: var(--primary-l); }
 }
 .ai-result-body strong { color: var(--accent); font-weight: 500; }
 
-/* ── PARTNERS ── */
+
 #partners { background: var(--surface); }
 .partners-grid {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 4rem;
@@ -504,7 +504,7 @@ h1.hero-title em { font-style: normal; color: var(--primary-l); }
   border: 1px solid rgba(245,158,11,.25);
 }
 
-/* ── TRACKING / DB ── */
+
 #tracking { }
 .tracking-wrap {
   max-width: 760px; margin: 4rem auto 0;
@@ -595,7 +595,7 @@ h1.hero-title em { font-style: normal; color: var(--primary-l); }
 .db-pill.waiting { background: rgba(37,99,235,.12); color: var(--primary-l); }
 .db-pill.delivered { background: rgba(16,185,129,.15); color: var(--green); }
 
-/* ── CTA ── */
+
 #cta { background: var(--surface); }
 .cta-wrap {
   max-width: 760px; margin: 0 auto; text-align: center;
@@ -604,7 +604,7 @@ h1.hero-title em { font-style: normal; color: var(--primary-l); }
 .cta-sub { color: var(--muted); font-size: 1rem; margin: 1rem auto 2.5rem; max-width: 480px; }
 .cta-btns { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; }
 
-/* ── FOOTER ── */
+
 footer {
   border-top: 1px solid var(--border);
   padding: 2.5rem 2rem;
@@ -621,7 +621,7 @@ footer {
 .footer-links a { font-size: .78rem; color: var(--muted); text-decoration: none; transition: color .2s; }
 .footer-links a:hover { color: var(--text); }
 
-/* ── RESPONSIVE ── */
+
 @media (max-width: 1100px) {
   .partners-grid { grid-template-columns: repeat(2, 1fr); }
   .benefits-grid { grid-template-columns: repeat(2, 1fr); }
@@ -650,7 +650,7 @@ footer {
   .hero-stats { gap: 1.5rem; }
 }
 
-/* ── TV / LARGE ── */
+
 @media (min-width: 1920px) {
   .container { max-width: 1600px; }
   .hero-inner { max-width: 1600px; }
@@ -659,7 +659,7 @@ footer {
   .hstat-num { font-size: 2.25rem; }
 }
 
-/* ── ANIMATIONS ── */
+
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity .55s ease, transform .55s ease; }
 .reveal.visible { opacity: 1; transform: none; }
 .reveal-d1 { transition-delay: .1s; }
@@ -667,14 +667,14 @@ footer {
 .reveal-d3 { transition-delay: .3s; }
 .reveal-d4 { transition-delay: .4s; }
 
-/* ── SPINNER ── */
+
 @keyframes spin360 { to { transform: rotate(360deg); } }
 .spin { animation: spin360 .8s linear infinite; }
 </style>
 </head>
 <body>
 
-<!-- PRELOADER -->
+
 <div id="preloader">
   <div class="pre-ring">
     <div class="pre-icon"><i class="fas fa-route"></i></div>
@@ -687,7 +687,7 @@ footer {
   <div style="font-family:var(--font-mono);font-size:.65rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase" id="pre-msg">Инициализация ИИ-систем...</div>
 </div>
 
-<!-- NAV -->
+
 <nav>
   <div class="nav-inner">
     <a href="#hero" class="nav-logo">
@@ -709,7 +709,7 @@ footer {
   </div>
 </nav>
 
-<!-- MOBILE MENU -->
+
 <div class="mobile-menu" id="mobile-menu">
   <a href="#benefits" onclick="toggleMenu()" data-i18n="nav-benefits">Возможности</a>
   <a href="#ai" onclick="toggleMenu()" data-i18n="nav-ai">ИИ-оптимизация</a>
@@ -717,7 +717,7 @@ footer {
   <a href="#tracking" onclick="toggleMenu()" data-i18n="nav-tracking">Трекинг</a>
 </div>
 
-<!-- HERO -->
+
 <section id="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
@@ -748,7 +748,7 @@ footer {
       </div>
     </div>
 
-    <!-- MINI DASHBOARD -->
+    
     <div class="hero-dashboard">
       <div class="dash-header">
         <div class="dash-title">AlmatyLogix · Corp DB</div>
@@ -783,7 +783,7 @@ footer {
   </div>
 </section>
 
-<!-- BENEFITS -->
+
 <section class="section" id="benefits">
   <div class="container">
     <div class="reveal">
@@ -827,7 +827,7 @@ footer {
   </div>
 </section>
 
-<!-- AI SECTION -->
+
 <section class="section" id="ai">
   <div class="ai-glow"></div>
   <div class="container">
@@ -874,7 +874,7 @@ footer {
   </div>
 </section>
 
-<!-- PARTNERS -->
+
 <section class="section" id="partners">
   <div class="container">
     <div class="reveal" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1.5rem">
@@ -996,7 +996,7 @@ footer {
   </div>
 </section>
 
-<!-- TRACKING -->
+
 <section class="section" id="tracking">
   <div class="container">
     <div class="reveal" style="text-align:center">
@@ -1065,7 +1065,7 @@ footer {
   </div>
 </section>
 
-<!-- CTA -->
+
 <section class="section" id="cta">
   <div class="container">
     <div class="cta-wrap reveal">
@@ -1086,7 +1086,7 @@ footer {
   </div>
 </section>
 
-<!-- FOOTER -->
+
 <footer>
   <div class="footer-inner">
     <div class="footer-logo"><i class="fas fa-route" style="color:var(--primary-l)"></i> Almaty<span class="dot">Logix</span></div>
@@ -1100,9 +1100,7 @@ footer {
 </footer>
 
 <script>
-/* ══════════════════════════════════════════
-   i18n
-══════════════════════════════════════════ */
+
 const langs = ['ru','en','kk'];
 let lang = 'ru';
 
@@ -1241,9 +1239,7 @@ function toggleLang() {
   applyLang();
 }
 
-/* ══════════════════════════════════════════
-   PRELOADER
-══════════════════════════════════════════ */
+
 const messages = ['Инициализация ИИ-систем...','Подключение к БД...','Загрузка маршрутов...','Синхронизация...'];
 let pct = 0, mIdx = 0;
 const preBar = document.getElementById('pre-bar');
@@ -1264,9 +1260,7 @@ const pInterval = setInterval(() => {
   }
 }, 130);
 
-/* ══════════════════════════════════════════
-   MINI DASHBOARD
-══════════════════════════════════════════ */
+
 const activities = [
   { color:'#3b82f6', text:'TTN-2026 → В пути: Алматы — Астана', time: null },
   { color:'#10b981', text:'DONER-77 → Доставлено: Сатпаева 29', time: null },
@@ -1300,7 +1294,6 @@ function renderBars() {
 renderBars();
 setInterval(renderBars, 3500);
 
-/* live counters */
 setInterval(() => {
   const t = document.getElementById('dash-transit');
   const d = document.getElementById('dash-done');
@@ -1316,9 +1309,7 @@ setInterval(() => {
   if(pr) pr.textContent = parseInt(pr.textContent) + (Math.random()>.6?1:0);
 }, 3000);
 
-/* ══════════════════════════════════════════
-   AI
-══════════════════════════════════════════ */
+
 const almaty = ['Апорт', 'Медеу', 'ВОАД', 'Алматы 1 (ЖД)', 'Аэропорт', 'Бостандык', 'Достык Плаза', 'Садовый', 'Алатау', 'Наурызбай'];
 const roads = ['Аль-Фараби', 'Сейфуллина', 'Абая', 'Розыбакиева', 'Достык'];
 
@@ -1357,9 +1348,7 @@ function runAI() {
   }, 2200);
 }
 
-/* ══════════════════════════════════════════
-   TRACKING / DB
-══════════════════════════════════════════ */
+
 const db = {
   'TTN-2026':  { text:'Груз в пути: Алматы → Астана', icon:'fa-truck', type:'transit', weight:'3.2 т', vehicle:'Gazelle', eta:'16:30' },
   'RADMIR-01': { text:'Прибыло на склад: Radmir Company', icon:'fa-warehouse', type:'arrived', weight:'1.5 т', vehicle:'Ford Transit', eta:'09:17' },
@@ -1398,23 +1387,16 @@ function checkStatus() {
 
 document.getElementById('ttn-input').addEventListener('keydown', e => { if(e.key==='Enter') checkStatus(); });
 
-/* ══════════════════════════════════════════
-   MOBILE MENU
-══════════════════════════════════════════ */
+
 function toggleMenu() {
   document.getElementById('mobile-menu').classList.toggle('open');
 }
 
-/* ══════════════════════════════════════════
-   PARTNER CONTACT
-══════════════════════════════════════════ */
+
 function requestCall(name) {
   alert(`${name}: ${i18n('cta-msg')}`);
 }
 
-/* ══════════════════════════════════════════
-   SCROLL REVEAL
-══════════════════════════════════════════ */
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.12 });
